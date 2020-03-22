@@ -26,7 +26,7 @@ public class DetailEditActivity extends AppCompatActivity {
         getWindow().getAttributes().width = width;
 
         getWindow().getAttributes().height = height;
-
+/*
         Button button = (Button) findViewById(R.id.finishbutton);
         Button button2 = (Button) findViewById(R.id.exitbutton2);
 
@@ -45,6 +45,6 @@ public class DetailEditActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+*/
     }
 }

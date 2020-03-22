@@ -12,6 +12,7 @@ public class DateUtil {
     public final static String HOUR_FORMAT = "HH";
     public final static String MIN_FORMAT = "mm";
     public final static String SEC_FORMAT = "ss";
+    public final static String NEW_DAY_FORMAT = "yyyyMMdd";
 
     // Date 를 넣으면 pattern 에 맞는 요소를 출력.
     public static String getDate(long date, String pattern) {

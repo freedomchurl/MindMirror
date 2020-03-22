@@ -3,9 +3,14 @@ package vaninside.mindmirror;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,30 +22,36 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
+    MindCalendarView cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+////////////// Database Test
+
+        SQLiteDatabase db;
+        db = openOrCreateDatabase("mind_calendar.db",MODE_PRIVATE, null);
+
+        String sql = "CREATE TABLE IF NOT EXISTS "+"mind_data"+" ("
+                +"id integer PRIMARY KEY autoincrement, "
+                +"date text NOT NULL, "
+                +"mind integer NOT NULL, "
+                +"text text "
+                +");";
+        db.execSQL(sql);
+
+        db.execSQL("INSERT INTO mind_data(date, mind, text) values (20200319, 1, '멋진 지민이')");
+        db.execSQL("INSERT INTO mind_data(date, mind, text) values (20200320, 2, '바보 철')");
+
+
+        db.close();
+/////////////////// Database Test
         setContentView(R.layout.activity_main);
         LinearLayout mL = (LinearLayout) findViewById(R.id.calLayout);
 
-        //--LinearLayout mainLayout = new LinearLayout(this);
-        //--mainLayout.setOrientation(LinearLayout.VERTICAL);
+        cal = new MindCalendarView(this, mL);
 
-
-        //LayoutInflater inflater = (LayoutInflater) getSystemService((Context.LAYOUT_INFLATER_SERVICE));
-        //ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mindcalendar, mainLayout, false);
-
-        MindCalendarView cal = new MindCalendarView(this, mL);
-        //--LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
-        //--params2.weight = 1;
-
-        //cal.setLayoutParams(params2);
-        //mainLayout.addView(cal);
-
-        // --- setContentView(mainLayout);
-        //setContentView(R.layout.mindcalendar);
 
         Button statButton = (Button) findViewById(R.id.statbutton);
         statButton.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        cal.mAdapter.notifyDataSetChanged();
+        super.onResume();
 
-
+    }
 }
 

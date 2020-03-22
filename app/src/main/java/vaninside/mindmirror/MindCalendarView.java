@@ -31,7 +31,7 @@ public class MindCalendarView extends LinearLayout {
 
     public TextView textView;
     public RecyclerView recyclerView;
-    private MindCalendarAdapter mAdapter;
+    public MindCalendarAdapter mAdapter;
     private StaggeredGridLayoutManager manager;
     private LayoutInflater inflater = null;
     public MindCalendarView(Context context, LinearLayout container){
@@ -80,7 +80,6 @@ public class MindCalendarView extends LinearLayout {
         }
 
         manager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
-
         mAdapter = new MindCalendarAdapter(mCalendarList);
 
         mAdapter.setCalendarList(mCalendarList);
@@ -101,15 +100,23 @@ public class MindCalendarView extends LinearLayout {
         for (int i = -300; i < 300; i++) {
             try {
                 GregorianCalendar calendar = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + i, 1, 0, 0, 0);
+                // 0일때는 오늘 날짜임. 그래서 오늘 날짜로 부터 300달 이후, 300달 이전 까지 표시 가능.
                 if (i == 0) {
+                    // 오늘 날짜를 중간지점으로 정하고.
                     mCenterPosition = calendarList.size();
                 }
 
-                // 타이틀인듯
-                calendarList.add(calendar.getTimeInMillis());
+                // 리스트에
+                // 타이틀인듯 LONG TYPE 이라서 타이틀.
+                calendarList.add(calendar.getTimeInMillis()); // 캘린더에 시간을 저장하고.
 
+                // 위에서 달만 설정하고, 날짜는 1 일로 설정함.
+                // DAY_OF_WEEK 는 현재 요일
+                // DAY_OF_MONTH 는 현재 월.
+                // 1 : 일, 2: 월 ....
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1; //해당 월에 시작하는 요일 -1 을 하면 빈칸을 구할 수 있겠죠 ?
-                int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 해당 월에 마지막 요일
+                int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 현재 월의 날짜.
+
 
                 // EMPTY 생성
                 for (int j = 0; j < dayOfWeek; j++) {
@@ -118,6 +125,14 @@ public class MindCalendarView extends LinearLayout {
                 for (int j = 1; j <= max; j++) {
                     calendarList.add(new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), j));
                 }
+
+                GregorianCalendar myCalendar = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + i, max, 0, 0, 0);
+                int tailEmpty = 7 - myCalendar.get(Calendar.DAY_OF_WEEK);
+
+                for (int j = 0; j < tailEmpty; j++) {
+                    calendarList.add(Keys.EMPTY);
+                }
+
 
                 // TODO : 결과값 넣을떄 여기다하면될듯
 

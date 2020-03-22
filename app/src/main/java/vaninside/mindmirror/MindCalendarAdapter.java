@@ -2,16 +2,22 @@ package vaninside.mindmirror;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,6 +25,7 @@ import vaninside.mindmirror.Model.CalendarHeader;
 import vaninside.mindmirror.Model.Day;
 import vaninside.mindmirror.Model.EmptyDay;
 import vaninside.mindmirror.Model.ViewModel;
+
 
 public class MindCalendarAdapter extends RecyclerView.Adapter {
 
@@ -42,7 +49,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         int viewType = getItemViewType(position);
-
+        //Log.d("Order","2");
         if (viewType == HEADER_TYPE) {
             HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
             Object item = mCalendarList.get(position);
@@ -93,19 +100,23 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-
+        //Log.d("Order","1");
         if (viewType == HEADER_TYPE) {
             HeaderViewHolder viewHolder = new HeaderViewHolder(inflater.inflate(R.layout.item_calendar_header, viewGroup, false));
 
             StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
             params.setFullSpan(true); // SPAN 을 하나로 통합
             viewHolder.itemView.setLayoutParams(params);
+            Log.d("TEST", "header");
 
             return viewHolder;
 
         } else if (viewType == EMPTY_TYPE) {
+            Log.d("TEST", "empty");
             return new EmptyViewHolder(inflater.inflate(R.layout.item_day_empty, viewGroup, false));
         } else {
+
+            Log.d("TEST", "day");
             return new DayViewHolder(inflater.inflate(R.layout.item_day, viewGroup, false));
         }
         //return null;
@@ -144,9 +155,9 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
 
             // 일자 값 가져오기
             String header = ((CalendarHeader) model).getHeader();
-
             // header에 표시하기, ex : 2018년 8월
             itemHeaderTitle.setText(header);
+
 
 
         }
@@ -178,6 +189,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
     private class DayViewHolder extends RecyclerView.ViewHolder {// 요일 입 ViewHolder
 
         TextView itemDay;
+        ImageView Mindimage;
 
         public DayViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -189,18 +201,9 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
         public void initView(View v) {
 
             itemDay = (TextView) v.findViewById(R.id.item_day);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO : process click event.
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("data", "Test Popup");
-                    context.startActivity(intent);
+            Mindimage = (ImageView) v.findViewById(R.id.mind_image);
 
 
-                }
-            });
 
         }
 
@@ -208,12 +211,70 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
 
             // 일자 값 가져오기
             String day = ((Day) model).getDay();
+            String currentDay = ((Day) model).getFullDay(); // yyyy-MM-dd
+            /*
+            String this_currentMonth;
+            if(t_Header != null)
+                this_currentMonth = t_Header.getText().toString();
+            else
+                this_currentMonth = currentMonth;
+            // DB 에서 정보를 가져와야함.
+            */
+            // 오늘의 날짜.
+            /*if(Integer.valueOf(day) < 10){
+                day = "0"+day;
+            }*/
+            //String currentDay = this_currentMonth + day;
+            //String currentDay = currentMonth + day;
+            //String result = String.format("%s%02d",currentMonth,Integer.valueOf(day));
+            Log.d(" DAY   ", day);
+
+            SQLiteDatabase db;
+            db = context.openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
+
+            final Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("currentDay", currentDay);
+
+            // NAME 컬럼 값이 'ppotta'인 모든 데이터 조회.
+            String sqlSelect = "SELECT * FROM mind_data WHERE date="+currentDay ;
+
+            Cursor cursor = db.rawQuery(sqlSelect, null) ;
+            int mind=0;
+            if(cursor != null) {
+                if(cursor.getCount() == 0) {
+                    Log.d("HERE   ", Integer.toString(mind));
+                    Mindimage.setImageResource(R.drawable.new_emotion);
+                    intent.putExtra("mode", 0);
+                } else {
+                    while (cursor.moveToNext()) {
+                        mind = cursor.getInt(2);
+                        //Log.d("HERE   ", Integer.toString(mind));
+                        Log.d("Checked","DAY : " + currentDay + " ," + "EMOTION : " + mind);
+                        if(mind == 1)
+                            Mindimage.setImageResource(R.drawable.new_emotion_2);
+                        else if (mind == 2)
+                            Mindimage.setImageResource(R.drawable.new_emotion_3);
+
+                    }
+                    intent.putExtra("mode", 1);
+                }
+            }
+
+            // 아이템을 클릭하면 상세 페이지로 넘어간다.
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO : process click event.
+                    context.startActivity(intent);
+                }
+            });
+
 
             // 일자 값 View에 보이게하기
             itemDay.setText(day);
-
+            db.close();
         }
 
-        ;
+
     }
 }
