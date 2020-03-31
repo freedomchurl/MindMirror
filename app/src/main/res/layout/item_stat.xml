@@ -7,11 +7,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/mindType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/new_emotion"
+        android:src="#ff0000"
         android:adjustViewBounds="true"
         android:foregroundGravity="center" />
 

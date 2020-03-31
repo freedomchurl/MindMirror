@@ -14,7 +14,7 @@
         android:paddingLeft="30dp"
         android:paddingTop="30dp">
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/day_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="17"
@@ -22,7 +22,7 @@
             android:textSize="50sp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/dayofweek_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TUE"
@@ -30,7 +30,7 @@
             android:textSize="20sp" />
     </LinearLayout>
     <ImageView
-        android:id="@+id/mind_detail_image"
+        android:id="@+id/mind_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/new_emotion"
@@ -38,7 +38,7 @@
         />
 
     <TextView
-        android:id="@+id/detail_textView"
+        android:id="@+id/detail_memo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -48,6 +48,11 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/instagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insta" />
 
 
 </LinearLayout>

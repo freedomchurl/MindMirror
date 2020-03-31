@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 
+/* Intro Activity with 3 seconds Intro page */
+
 public class IntroActivity extends AppCompatActivity {
 
     @Override
@@ -22,7 +24,6 @@ public class IntroActivity extends AppCompatActivity {
                 finish();
             }
         }, 3000);
-
     }
 
     @Override

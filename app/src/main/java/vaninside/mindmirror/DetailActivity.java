@@ -1,6 +1,5 @@
 package vaninside.mindmirror;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -14,88 +13,103 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import vaninside.mindmirror.Model.CreateViewToBitmap;
 
-public class DetailActivity extends AppCompatActivity implements Bfragment.InteractListener{
+/* Detail Page when you click the calendar */
+/* Show Emotion and Memo of each day */
+
+public class DetailActivity extends AppCompatActivity {
+
+    // fragment A : detail show page
+    // fragment B : detail edit page
 
     private FragmentManager fragmentManager;
-    private Afragment fragmentA;
-    private Bfragment fragmentB;
+    private DetailFragment fragmentA;
+    private DetailEditFragment fragmentB;
     private FragmentTransaction transaction;
-    private boolean isFragmentB= false;
-    private String currentDay;
-    private int mind=0;
-    private Button button;
+    private boolean isFragmentB = false;
 
-    public TextView dayTextview;
-    public TextView dayOfTheWeekTextview;
+    private String currentDay;
+    private Button button;
 
     SQLiteDatabase db;
 
-    // Data for edit
-    private int mMind;
-    private String mText;
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+    private boolean isExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        dayTextview = (TextView) findViewById(R.id.textView2);
-        dayOfTheWeekTextview = (TextView) findViewById(R.id.textView3);
-
-        currentDay = getIntent().getStringExtra("currentDay");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment);
+
+        // get currentDay Info
+        currentDay = getIntent().getStringExtra("currentDay");
+
+        setContentView(R.layout.detail_fragment);
+
+        // mode 0 : No data. Edit Page
+        // mode 1 : Have data. Show Page
+
         Intent intent = getIntent();
         int mode = intent.getIntExtra("mode", 0);
 
+        if (mode == 0)
+            isExist = false;
+        else
+            isExist = true;
+
+        // Display Popup
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
         int width = (int) (display.getWidth() * 0.8); //Display 사이즈의 70%
         int height = (int) (display.getHeight() * 0.8);  //Display 사이즈의 90%
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
-        db = openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
 
-
-        // NAME 컬럼 값이 'ppotta'인 모든 데이터 조회.
-        String sqlSelect = "SELECT * FROM mind_data WHERE date="+currentDay ;
-
-        Cursor cursor = db.rawQuery(sqlSelect, null) ;
-        if(cursor != null) {
-            while (cursor.moveToNext()) {
-                // INTEGER로 선언된 첫 번째 "NO" 컬럼 값 가져오기.
-                mind = cursor.getInt(2);
-        }
-
-            button = (Button) findViewById(R.id.mybutton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("TEST" , mMind + " " + mText);
-                    switchFragment();
+        // Finish or Edit Button
+        button = (Button) findViewById(R.id.mybutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button.getText() == "FINISH") {
+                    // Edit Page should save data.
+                    if (isFragmentB) {
+                        ((DetailEditFragment) getSupportFragmentManager().findFragmentById(R.id.frame)).saveData();
+                    }
                 }
-            });
+                switchFragment();
+            }
+        });
 
-            Button exitButton = (Button) findViewById(R.id.exitbutton);
-            exitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+        Button exitButton = (Button) findViewById(R.id.exitbutton);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+        Button deleteButton = (Button) findViewById(R.id.deletebutton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // open database
+                db = openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
+                db.execSQL("DELETE FROM mind_data where date =  '" + currentDay + "';");
+                db.close();
+                Toast.makeText(getApplicationContext(), "데이터 삭제 완료", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+
+        // Fragment Setting
         fragmentManager = getSupportFragmentManager();
 
-        fragmentA = new Afragment();
-        fragmentB = new Bfragment();
+        fragmentA = new DetailFragment();
+        fragmentB = new DetailEditFragment();
 
+        // get currentDay data
         Bundle bundle = new Bundle();
         bundle.putString("currentDay", currentDay);
 
@@ -103,46 +117,34 @@ public class DetailActivity extends AppCompatActivity implements Bfragment.Inter
         fragmentB.setArguments(bundle);
 
         transaction = fragmentManager.beginTransaction();
-        if(mode == 0){
-            //mMind = 0;
-            //mText = null;
+        if (mode == 0) {
             transaction.replace(R.id.frame, fragmentB).commitAllowingStateLoss();
             isFragmentB = true;
             button.setText("FINISH");
-        }else{
-
-            //db = openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
-            //db.execSQL("UPDATE mind_data SET text="+mText+" WHERE date="+currentDay+";");
-            //db.execSQL("INSERT INTO mind_data(mind, text) values ("+mMind+","+mText+");");
+            if (isExist)
+                deleteButton.setVisibility(View.VISIBLE);
+            else
+                deleteButton.setVisibility(View.INVISIBLE);
+        } else {
             transaction.replace(R.id.frame, fragmentA).commitAllowingStateLoss();
             isFragmentB = false;
             button.setText("EDIT");
+            deleteButton.setVisibility(View.INVISIBLE);
         }
-        // state 의 저장과 관련없게 작동하려면.
-
-
-
-    };
     }
+
 
     public void switchFragment() {
         Fragment fr;
         if (isFragmentB) {
-            db = openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
-            //Log.d("string test",mText);
-            db.execSQL("UPDATE mind_data SET text="+mText+" WHERE date="+currentDay+";");
-            //db.execSQL("INSERT INTO mind_data(mind, text) values ("+mMind+","+mText+");");
-            db.close();
-            fr = new Afragment();
+            fr = new DetailFragment();
             button.setText("EDIT");
         } else {
-            mMind = 0;
-            mText = null;
-            fr = new Bfragment();
+            fr = new DetailEditFragment();
             button.setText("FINISH");
         }
 
-
+        // pass currentDay Info.
         Bundle bundle = new Bundle();
         bundle.putString("currentDay", currentDay);
 
@@ -154,12 +156,7 @@ public class DetailActivity extends AppCompatActivity implements Bfragment.Inter
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.frame, fr);
         transaction.commit();
-
     }
 
-    @Override
-    public void interact(int mind, String text) {
-        mMind = mind;
-        mText = text;
-    }
+
 }

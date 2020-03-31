@@ -3,7 +3,6 @@ package vaninside.mindmirror;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,16 +15,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 // Detail Edit Page
-public class Bfragment extends Fragment {
-    private InteractListener interactListener;
+public class DetailEditFragment extends Fragment {
 
     Context context;
     String currentDay;
-    int mind;
+
+    int mind = 0;
     String text= "";
-    EditText editText;
+
+    private TextView dayTextView;
+    private TextView dayOfweekTextView;
+    public static EditText editText;
     ImageView imageView1;
     ImageView imageView2;
     ImageView imageView3;
@@ -38,7 +42,7 @@ public class Bfragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_detail_edit, container, false);
+        View v = inflater.inflate(R.layout.detail_edit, container, false);
 
         context = getActivity();
         currentDay = getArguments().getString("currentDay");
@@ -46,15 +50,48 @@ public class Bfragment extends Fragment {
         final ImageView imageView = (ImageView) v.findViewById(R.id.mind_detail_edit_image);
         editText = (EditText) v.findViewById(R.id.detail_editText);
 
-
+        // -------------------- 감정 옵션.
         imageView1 = (ImageView) v.findViewById(R.id.mind_1);
         imageView2 = (ImageView) v.findViewById(R.id.mind_2);
         imageView3 = (ImageView) v.findViewById(R.id.mind_3);
 
+        dayTextView = (TextView) v.findViewById(R.id.edit_day_textview);
+        dayOfweekTextView = (TextView) v.findViewById(R.id.edit_dayofweek_textview);
+
+        int today = Integer.parseInt(currentDay.substring(6,8));
+        dayTextView.setText(Integer.toString(today));
+
+        GregorianCalendar myCalendar = new GregorianCalendar(Integer.parseInt(currentDay.substring(0,4)), Integer.parseInt(currentDay.substring(4,6))-1, Integer.parseInt(currentDay.substring(6,8)), 0, 0, 0);
+        int dayOfWeek = myCalendar.get(Calendar.DAY_OF_WEEK);
+        String dayOfWeekStr="";
+
+        switch (dayOfWeek){
+            case 1 :
+                dayOfWeekStr = "SUN";
+                break;
+            case 2 :
+                dayOfWeekStr = "MON";
+                break;
+            case 3 :
+                dayOfWeekStr = "TUE";
+                break;
+            case 4 :
+                dayOfWeekStr = "WED";
+                break;
+            case 5 :
+                dayOfWeekStr = "THU";
+                break;
+            case 6 :
+                dayOfWeekStr = "FRI";
+                break;
+            case 7 :
+                dayOfWeekStr = "SAT";
+                break;
+        }
+        dayOfweekTextView.setText(dayOfWeekStr);
+
         db = context.openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
 
-
-        // NAME 컬럼 값이 'ppotta'인 모든 데이터 조회.
         String sqlSelect = "SELECT * FROM mind_data WHERE date=" + currentDay;
 
         Cursor cursor = db.rawQuery(sqlSelect, null);
@@ -64,35 +101,33 @@ public class Bfragment extends Fragment {
             }else{
                 isExist = true;
             while (cursor.moveToNext()) {
-                // INTEGER로 선언된 첫 번째 "NO" 컬럼 값 가져오기.
                 mind = cursor.getInt(2);
                 text = cursor.getString(3);
             }
 
             editText.setText(text);
 
-            if (mind == 0)
+            // ---------------- 저장된 mind 따라서 사진 표시해주기.
+            if (mind == 0) // default
                 imageView.setImageResource(R.drawable.new_emotion);
             else if (mind == 1)
                 imageView.setImageResource(R.drawable.new_emotion_2);
             else if (mind == 2)
                 imageView.setImageResource(R.drawable.new_emotion_3);
 
-
-           // db.execSQL("UPDATE mind_data SET text="+editText.getText()+" WHERE date="+currentDay+";");
         }}
 
-
+        // 감정 수정하기에서 감정 그림을 클릭하면
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageEditCheck) { // 버튼 다시 누르면 안보이게
+                if(imageEditCheck) { // 버튼 다시 누르면 옵션 안보이게
                     imageView1.setVisibility(View.INVISIBLE);
                     imageView2.setVisibility(View.INVISIBLE);
                     imageView3.setVisibility(View.INVISIBLE);
                     imageEditCheck = false;
                 }
-                else { // 버튼 누르면 보이게
+                else { // 버튼 누르면 옵션 보이게
                     imageView1.setVisibility(View.VISIBLE);
                     imageView2.setVisibility(View.VISIBLE);
                     imageView3.setVisibility(View.VISIBLE);
@@ -101,6 +136,7 @@ public class Bfragment extends Fragment {
             }
         });
 
+        // 옵션 클릭하면 내 감정 설정.
         emotionClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,67 +150,33 @@ public class Bfragment extends Fragment {
                     mind=3;
                     imageView.setImageResource(R.drawable.new_emotion_4);}
 
-
-// 눌렀으면 감정들 사라지게 하고.
-                imageView1.setVisibility(View.INVISIBLE);
-                imageView2.setVisibility(View.INVISIBLE);
-                imageView3.setVisibility(View.INVISIBLE);
-                imageEditCheck = false;
-
-                // 감정 이모티콘을 업데이트 해야지.
-               // db.execSQL("UPDATE mind_data SET mind="+mind+" WHERE date="+currentDay+";");
-
-
             }
 
 
         };
-        //db.execSQL("INSERT INTO mind_data(date, mind, text) values (20200320, 2, '바보 철')");
-//        db.execSQL("INSERT INTO mind_data(date, text) values (20200320,'바보 철')");
-        //interactListener.interact(mind, text);
 
         imageView1.setOnClickListener(emotionClick);
         imageView2.setOnClickListener(emotionClick);
         imageView3.setOnClickListener(emotionClick);
+
+        db.close();
         return v;
     }
 
-    public interface InteractListener {
-        void interact(int mind, String text);
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof InteractListener) {
-            interactListener = (InteractListener) context;
 
-        }else {
-            throw new RuntimeException(context.toString() + " must implement InteractListener");
-        }
-    }
 
-    @Override
-    public void onPause() {
+    public void saveData(){
         text = editText.getText().toString();
-        interactListener.interact(mind, text);
-
 
         db = context.openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
 
-if(isExist)
-        db.execSQL("UPDATE mind_data SET text='"+editText.getText().toString()+"', mind = "+mind+" WHERE date="+currentDay+";");
-else {
-    Log.d("data list", "hello " + currentDay + " " + mind + " " + text + " bye");
-    db.execSQL("INSERT INTO mind_data(date, mind, text) values (" + currentDay + "," + mind + ",'" + text + "');");
-}   db.close();
-        super.onPause();
+        if (isExist)
+            db.execSQL("UPDATE mind_data SET text='" + editText.getText().toString() + "', mind = " + mind + " WHERE date=" + currentDay + ";");
+        else {
+            db.execSQL("INSERT INTO mind_data(date, mind, text) values (" + currentDay + "," + mind + ",'" + text + "');");
+        }
 
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        interactListener = null;
+        db.close();
     }
 }

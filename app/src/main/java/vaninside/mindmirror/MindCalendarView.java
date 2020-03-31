@@ -26,7 +26,6 @@ import static android.content.ContentValues.TAG;
 public class MindCalendarView extends LinearLayout {
 
     public int mCenterPosition;
-    private long mCurrentTime;
     public ArrayList<Object> mCalendarList = new ArrayList<>();
 
     public TextView textView;
@@ -34,6 +33,7 @@ public class MindCalendarView extends LinearLayout {
     public MindCalendarAdapter mAdapter;
     private StaggeredGridLayoutManager manager;
     private LayoutInflater inflater = null;
+
     public MindCalendarView(Context context, LinearLayout container){
         super(context);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -41,31 +41,20 @@ public class MindCalendarView extends LinearLayout {
     }
 
     public View onCreateView(ViewGroup container) {
-
-        //LayoutInflater inflater = (LayoutInflater) getSystemService((Context.LAYOUT_INFLATER_SERVICE));
-
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mindcalendar, container, true);
-
         initView(rootView);
-
         initSet();
-
         setRecycler();
-
         return rootView;
     }
-    public void initView(View v){
 
+    public void initView(View v){
         textView = (TextView)v.findViewById(R.id.title);
         recyclerView = (RecyclerView)v.findViewById(R.id.calendar);
-        if(recyclerView == null)
-            Log.d("Check","dddd");
     }
 
     public void initSet(){
-
         initCalendarList();
-
     }
 
     public void initCalendarList() {
@@ -76,7 +65,7 @@ public class MindCalendarView extends LinearLayout {
     private void setRecycler() {
 
         if (mCalendarList == null) {
-            //Log.w(TAG, "No Query, not initializing RecyclerView");
+            Log.w(TAG, "No Query, not initializing RecyclerView");
         }
 
         manager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
@@ -93,21 +82,18 @@ public class MindCalendarView extends LinearLayout {
 
     public void setCalendarList(GregorianCalendar cal) {
 
-        //setTitle(cal.getTimeInMillis());
-
         ArrayList<Object> calendarList = new ArrayList<>();
 
         for (int i = -300; i < 300; i++) {
             try {
                 GregorianCalendar calendar = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + i, 1, 0, 0, 0);
-                // 0일때는 오늘 날짜임. 그래서 오늘 날짜로 부터 300달 이후, 300달 이전 까지 표시 가능.
+                // 0일때 오늘 날짜. 그래서 오늘 날짜로 부터 300달 이후, 300달 이전 까지 표시 가능.
+
                 if (i == 0) {
-                    // 오늘 날짜를 중간지점으로 정하고.
+                    // 오늘 날짜를 Center Position으로 정하고.
                     mCenterPosition = calendarList.size();
                 }
 
-                // 리스트에
-                // 타이틀인듯 LONG TYPE 이라서 타이틀.
                 calendarList.add(calendar.getTimeInMillis()); // 캘린더에 시간을 저장하고.
 
                 // 위에서 달만 설정하고, 날짜는 1 일로 설정함.
@@ -117,11 +103,12 @@ public class MindCalendarView extends LinearLayout {
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1; //해당 월에 시작하는 요일 -1 을 하면 빈칸을 구할 수 있겠죠 ?
                 int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 현재 월의 날짜.
 
-
-                // EMPTY 생성
+                // 1일 전의 빈칸
                 for (int j = 0; j < dayOfWeek; j++) {
                     calendarList.add(Keys.EMPTY);
                 }
+
+                // 날짜 입력 칸
                 for (int j = 1; j <= max; j++) {
                     calendarList.add(new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), j));
                 }
@@ -129,21 +116,17 @@ public class MindCalendarView extends LinearLayout {
                 GregorianCalendar myCalendar = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + i, max, 0, 0, 0);
                 int tailEmpty = 7 - myCalendar.get(Calendar.DAY_OF_WEEK);
 
+                // 마지막 날 이후의 빈칸
                 for (int j = 0; j < tailEmpty; j++) {
                     calendarList.add(Keys.EMPTY);
                 }
-
-
-                // TODO : 결과값 넣을떄 여기다하면될듯
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         mCalendarList = calendarList;
     }
-
 
     public class Keys {
         public static final String EMPTY = "empty";

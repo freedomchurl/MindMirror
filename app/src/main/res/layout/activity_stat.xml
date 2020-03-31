@@ -28,7 +28,6 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
         </Spinner>
 
     </LinearLayout>
@@ -37,4 +36,5 @@
         android:id="@+id/statRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </LinearLayout>

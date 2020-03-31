@@ -14,7 +14,7 @@
         android:paddingLeft="30dp"
         android:paddingTop="30dp">
         <TextView
-            android:id="@+id/edit_textView2"
+            android:id="@+id/edit_day_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="17"
@@ -22,7 +22,7 @@
             android:textSize="50sp" />
 
         <TextView
-            android:id="@+id/edit_textView3"
+            android:id="@+id/edit_dayofweek_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TUE"

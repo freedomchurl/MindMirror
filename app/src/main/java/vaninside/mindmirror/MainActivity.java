@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/* Main Page with Mind Calendar and Menu */
+
 public class MainActivity extends AppCompatActivity {
     MindCalendarView cal;
 
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-////////////// Database Test
+// --------------- Database Setting ( mind_data table in mind_calendar.db )
 
         SQLiteDatabase db;
         db = openOrCreateDatabase("mind_calendar.db",MODE_PRIVATE, null);
@@ -41,19 +43,18 @@ public class MainActivity extends AppCompatActivity {
                 +");";
         db.execSQL(sql);
 
-        db.execSQL("INSERT INTO mind_data(date, mind, text) values (20200319, 1, '멋진 지민이')");
-        db.execSQL("INSERT INTO mind_data(date, mind, text) values (20200320, 2, '바보 철')");
-
-
         db.close();
-/////////////////// Database Test
+
+// --------------- Database Setting finish
+
         setContentView(R.layout.activity_main);
-        LinearLayout mL = (LinearLayout) findViewById(R.id.calLayout);
+        LinearLayout calLayout = (LinearLayout) findViewById(R.id.calLayout);
 
-        cal = new MindCalendarView(this, mL);
-
+        cal = new MindCalendarView(this, calLayout);
 
         Button statButton = (Button) findViewById(R.id.statbutton);
+        Button settingButton = (Button) findViewById(R.id.settingbutton);
+
         statButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,14 +63,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Setting button click listener Part
+            }
+        });
 
+    }
 
     @Override
     protected void onResume() {
         cal.mAdapter.notifyDataSetChanged();
         super.onResume();
-
     }
 }
 
