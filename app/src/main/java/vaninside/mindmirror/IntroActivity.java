@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 /* Intro Activity with 3 seconds Intro page */
+// git test
+
 
 public class IntroActivity extends AppCompatActivity {
 
