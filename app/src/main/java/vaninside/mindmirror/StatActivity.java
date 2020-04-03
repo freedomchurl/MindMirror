@@ -151,7 +151,9 @@ public class StatActivity extends AppCompatActivity {
             mindCount[this.mindList.get(i)-1]++;
         }
 
+        if(num!=0) {
             Arrays.sort(mindCount, Collections.reverseOrder());
+
 
             this.mStatList.clear();
 
@@ -161,7 +163,7 @@ public class StatActivity extends AppCompatActivity {
             }
 
             adapter.notifyAll();
-
+        }
     }
 
     private int getTargetDate(Calendar cal)

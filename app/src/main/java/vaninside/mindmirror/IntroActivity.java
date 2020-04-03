@@ -1,6 +1,7 @@
 package vaninside.mindmirror;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +18,24 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("mind_key",MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("darkmode",false);
+
+        final boolean isLocked = sharedPreferences.getBoolean("lockmode",false);
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                Intent intent = null;
+
+                if(isLocked == false)
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                else
+                    intent = new Intent(getApplicationContext(),LockerActivity.class);
+
                 startActivity(intent);
                 finish();
             }

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class OptionActivity extends AppCompatActivity {
     public Switch darkSwitch = null;
     public boolean isDarkMode = false;
 
+    public ImageButton backButton = null;
 
     public Switch lockSwitch = null;
     public boolean isLocked = false;
@@ -65,6 +67,7 @@ public class OptionActivity extends AppCompatActivity {
     }
     public void InitView()
     {
+        backButton = (ImageButton) findViewById(R.id.backtoMain);
         AlarmSwitch = (Switch) findViewById(R.id.alarmSwitch);
         instLayout = (LinearLayout) findViewById(R.id.instagramLayout);
         tAlarmTime = (TextView) findViewById(R.id.alramTime);
@@ -72,6 +75,13 @@ public class OptionActivity extends AppCompatActivity {
         lockSwitch = (Switch) findViewById(R.id.lockSwitch);
 
         InitDB(); // DB로부터 Setting 초기화.
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         instLayout.setOnClickListener(new View.OnClickListener() {
             @Override

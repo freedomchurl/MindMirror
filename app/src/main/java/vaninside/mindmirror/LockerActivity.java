@@ -24,6 +24,8 @@ import java.security.NoSuchAlgorithmException;
 
 //import static com.kakao.util.helper.Utility.getPackageInfo;
 
+//import static com.kakao.util.helper.Utility.getPackageInfo;
+
 public class LockerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageButton[] bKeyNum = new ImageButton[10];
@@ -40,7 +42,7 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_locker);
 
         this.tPassText = (TextView) findViewById(R.id.enterPassText);
         lockerType = getIntent().getIntExtra("lockerType",0); // 기본적으로 0
@@ -54,11 +56,12 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
         //최종 커밋
 
         InitKeyNum();
-        String keyHash = getKeyHash(getApplicationContext());
-        Log.d("KEYHAST Value",keyHash);
+        //String keyHash = getKeyHash(getApplicationContext());
+        //Log.d("KEYHAST Value",keyHash);
     }
+    /*
     public static String getKeyHash(final Context context) {
-        /*
+
         PackageInfo packageInfo = getPackageInfo(context, PackageManager.GET_SIGNATURES);
         if (packageInfo == null)
             return null;
@@ -72,10 +75,10 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
                 Log.w("HASHKEY", "Unable to get MessageDigest. signature=" + signature, e);
             }
         }
-        */
+
         return null;
     }
-
+*/
     private void InitViewType()
     {
         if(lockerType == 0)
@@ -220,7 +223,7 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
 
                     if (passNum.equals(myPass)) {
                         if (lockerType == 0) {
-                            Intent intent = new Intent(getApplicationContext(), OptionActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);//액티비티를 메인으로 넘긴다.
                             finish();
                         } else if (lockerType == 1) {
