@@ -61,8 +61,8 @@ public class DetailActivity extends AppCompatActivity {
         // Display Popup
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        int width = (int) (display.getWidth() * 0.8); //Display 사이즈의 70%
-        int height = (int) (display.getHeight() * 0.8);  //Display 사이즈의 90%
+        int width = (int) (display.getWidth() * 0.9); //Display 사이즈의 70%
+        int height = (int) (display.getHeight() * 0.9);  //Display 사이즈의 90%
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
 

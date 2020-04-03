@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         String sql = "CREATE TABLE IF NOT EXISTS "+"mind_data"+" ("
                 +"id integer PRIMARY KEY autoincrement, "
-                +"date text NOT NULL, "
+                +"date integer NOT NULL, "
                 +"mind integer NOT NULL, "
                 +"text text "
                 +");";

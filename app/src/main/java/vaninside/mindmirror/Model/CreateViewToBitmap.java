@@ -24,10 +24,11 @@ public class CreateViewToBitmap {
     public static Bitmap createViewToBitmap(Context context, View view) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        //view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.buildDrawingCache();
 
-        Bitmap bitmap = Bitmap.createBitmap(2000, 2000, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         view.draw(canvas);
 

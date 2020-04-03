@@ -89,8 +89,9 @@
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimary"
         android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:maxLength="300" />
 
 
 

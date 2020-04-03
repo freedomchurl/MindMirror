@@ -64,6 +64,7 @@ public class DetailFragment extends Fragment {
         context = getActivity();
         ImageView mindImage = (ImageView) v.findViewById(R.id.mind_image);
         TextView textView = (TextView) v.findViewById(R.id.detail_memo);
+        final LinearLayout mind_layout = (LinearLayout) v.findViewById(R.id.mind_layout);
 
         if (getArguments() != null)
             currentDay = getArguments().getString("currentDay");
@@ -109,7 +110,7 @@ public class DetailFragment extends Fragment {
         instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap shareImage = shareManager.createViewToBitmap(context, v);
+                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
                 shareInstagram(shareImage);
 
             }
