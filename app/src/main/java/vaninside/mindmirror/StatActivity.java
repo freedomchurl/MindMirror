@@ -146,6 +146,11 @@ public class StatActivity extends AppCompatActivity {
 
         Integer mindCount [] = new Integer[10];
 
+        for(int i =0;i<10;i++)
+        {
+            mindCount[i] = new Integer(0);
+        }
+
         for(int i=0;i<num;i++)
         {
             mindCount[this.mindList.get(i)-1]++;
