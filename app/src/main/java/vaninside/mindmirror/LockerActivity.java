@@ -118,6 +118,11 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
         bBackKey.setOnClickListener(LockerActivity.this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @Override
     public void onClick(View view) {

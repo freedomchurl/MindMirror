@@ -33,7 +33,7 @@ public class OptionActivity extends AppCompatActivity {
     public boolean isLocked = false;
 
     public int alarmHour = 0;
-    public int alarmMin = 0;
+        public int alarmMin = 0;
 
     public LinearLayout instLayout = null;
     @Override
@@ -44,7 +44,7 @@ public class OptionActivity extends AppCompatActivity {
 
         InitView();
        // InitDB();
-       }
+    }
 
     public void InitDB()
     {
@@ -65,6 +65,7 @@ public class OptionActivity extends AppCompatActivity {
         alarmMin = sharedPreferences.getInt("alarmMin",0);
 
     }
+
     public void InitView()
     {
         backButton = (ImageButton) findViewById(R.id.backtoMain);
@@ -150,13 +151,17 @@ public class OptionActivity extends AppCompatActivity {
                 //editor.putBoolean("lockmode",isLocked); // key, value를 이용하여 저장하는 형
                 //editor.commit();
 
-                if(isChecked == true)
+                if(isChecked == true && isLocked==false)
                 {
+
+                    //Log.d("Lock Set",222 + "");
                     // 이전에 flase였다. 이번에 비밀번호를 설정하는 경우
                     SetLock();
                 }
-                else if(isChecked == false)
+                else if(isChecked == false && isLocked == true)
                 {
+
+                    //Log.d("Lock Set",111 + "");
                     // 이전에 true였다. 이번에 비밀번호를 지워야 한다.
                     RemoveLock();
                 }
@@ -177,6 +182,7 @@ public class OptionActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK)
             {
                 isLocked = false;
+                lockSwitch.setChecked(false);
                 SharedPreferences sharedPreferences = getSharedPreferences("mind_key",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("lockmode",isLocked); // key, value를 이용하여 저장하는 형
@@ -184,14 +190,19 @@ public class OptionActivity extends AppCompatActivity {
                 editor.commit();
 
             }
+            else
+            {
+                lockSwitch.setChecked(true);
+            }
         }
         else if(requestCode == 2)
         {
             if(resultCode == Activity.RESULT_OK)
             {
                 isLocked = true;
-
             }
+            else
+                lockSwitch.setChecked(false);
         }
     }
 
@@ -201,9 +212,12 @@ public class OptionActivity extends AppCompatActivity {
         // 1. 현재 Lock이 걸려있는 경우다.
         // 2. 현재 비밀번호를 입력하시오. 라는 창이 떠야한다.
         // 3. 비밀번호가 맞을경우, startActivityonResult 에서 값을 가져와야한다.
+
+       // Log.d("Lock Set",111 + "");
         Intent it = new Intent(getApplicationContext(),LockerActivity.class);
         it.putExtra("lockerType",1); // 비밀 번호 제거
         startActivityForResult(it,1);
+
 
     }
 
@@ -213,8 +227,11 @@ public class OptionActivity extends AppCompatActivity {
         // 1. 새롭게 비밀번호 설정 페이지가 떠야한다.
         // 2. 비밀번호 재입력 페이지가 떠야하고.
         // 3. 두 비밀번호가 일치할 경우, SharedPreferences 에 저장하고 Option으로 돌아와야한다.
+
+        //Log.d("Lock Set",222 + "");
         Intent it = new Intent(getApplicationContext(),LockerActivity.class);
         it.putExtra("lockerType",2); // 비밀 번호 제거
         startActivityForResult(it,2);
+
     }
 }
