@@ -9,19 +9,16 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.util.DisplayMetrics;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +28,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kakao.message.template.ButtonObject;
+import com.kakao.message.template.ContentObject;
+import com.kakao.message.template.FeedTemplate;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.SocialObject;
+import com.kakao.message.template.TemplateParams;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -53,6 +54,7 @@ public class DetailFragment extends Fragment {
     private TextView dayOfweekTextView;
     private Button instagram;
 
+    private Button Kakao;
 
     CreateViewToBitmap shareManager;
 
@@ -72,6 +74,9 @@ public class DetailFragment extends Fragment {
         dayTextView = (TextView) v.findViewById(R.id.day_textview);
         dayOfweekTextView = (TextView) v.findViewById(R.id.dayofweek_textview);
         instagram = (Button) v.findViewById(R.id.instagram);
+
+        this.Kakao = (Button) v.findViewById(R.id.kakao);
+
 
         int today = Integer.parseInt(currentDay.substring(6, 8));
         dayTextView.setText(Integer.toString(today));
@@ -112,6 +117,15 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
                 shareInstagram(shareImage);
+
+            }
+        });
+
+        this.Kakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                shareKakao(shareImage);
 
             }
         });
@@ -207,5 +221,36 @@ public class DetailFragment extends Fragment {
         }
     }
 
+    public void shareKakao(Bitmap bitmap) {
+        TemplateParams params = FeedTemplate
+                .newBuilder(ContentObject.newBuilder(
+                        "디저트 사진",
+                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                        LinkObject.newBuilder()
+                                .setWebUrl("https://developers.kakao.com")
+                                .setMobileWebUrl("https://developers.kakao.com")
+                                .build())
+                        .setDescrption("아메리카노, 빵, 케익")
+                        .build())
+                .setSocial(SocialObject.newBuilder()
+                        .setLikeCount(10)
+                        .setCommentCount(20)
+                        .setSharedCount(30)
+                        .setViewCount(40)
+                        .build())
+                .addButton(new ButtonObject(
+                        "웹에서 보기",
+                        LinkObject.newBuilder()
+                                .setWebUrl("https://developers.kakao.com")
+                                .setMobileWebUrl("https://developers.kakao.com")
+                                .build()))
+                .addButton(new ButtonObject(
+                        "앱에서 보기",
+                        LinkObject.newBuilder()
+                                .setAndroidExecutionParams("key1=value1")
+                                .setIosExecutionParams("key1=value1")
+                                .build()))
+                .build();
+    }
 
 }

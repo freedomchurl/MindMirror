@@ -1,14 +1,13 @@
 package vaninside.mindmirror;
 
 import android.app.Activity;
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -217,8 +216,6 @@ public class OptionActivity extends AppCompatActivity {
         Intent it = new Intent(getApplicationContext(),LockerActivity.class);
         it.putExtra("lockerType",1); // 비밀 번호 제거
         startActivityForResult(it,1);
-
-
     }
 
     public void SetLock()
