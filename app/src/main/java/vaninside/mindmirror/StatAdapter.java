@@ -86,9 +86,10 @@ public class StatAdapter extends RecyclerView.Adapter {
             progressBar.setProgress(data.getNum());
 
             if(data.getEmotion() == 1)
-                mindType.setBackgroundColor(Color.RED);
+                mindType.setImageResource(R.drawable.new_emotion_2);
+                //mindType.setBackgroundColor(Color.RED);
             else if(data.getEmotion() == 2)
-                mindType.setBackgroundColor(Color.BLUE);
+                mindType.setImageResource(R.drawable.new_emotion_3);
         }
     }
 
