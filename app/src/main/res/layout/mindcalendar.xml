@@ -88,7 +88,7 @@
     </LinearLayout>
 
     <!--달력뷰-->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

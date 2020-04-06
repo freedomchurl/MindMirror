@@ -13,15 +13,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.text.Layout;
-import android.util.DisplayMetrics;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -34,6 +33,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kakao.kakaolink.v2.KakaoLinkResponse;
+import com.kakao.kakaolink.v2.KakaoLinkService;
+import com.kakao.message.template.ButtonObject;
+import com.kakao.message.template.ContentObject;
+import com.kakao.message.template.FeedTemplate;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.SocialObject;
+import com.kakao.message.template.TemplateParams;
+import com.kakao.network.ErrorResult;
+import com.kakao.network.callback.ResponseCallback;
+import com.kakao.network.storage.ImageUploadResponse;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,6 +68,7 @@ public class DetailFragment extends Fragment {
     private TextView dayOfweekTextView;
     private Button instagram;
 
+    private Button Kakao;
 
     CreateViewToBitmap shareManager;
 
@@ -80,6 +92,7 @@ public class DetailFragment extends Fragment {
         mindImage.setLayoutParams(params2);
       */
         TextView textView = (TextView) v.findViewById(R.id.detail_memo);
+        final LinearLayout mind_layout = (LinearLayout) v.findViewById(R.id.mind_layout);
 
         if (getArguments() != null)
             currentDay = getArguments().getString("currentDay");
@@ -87,6 +100,9 @@ public class DetailFragment extends Fragment {
         dayTextView = (TextView) v.findViewById(R.id.day_textview);
         dayOfweekTextView = (TextView) v.findViewById(R.id.dayofweek_textview);
         instagram = (Button) v.findViewById(R.id.instagram);
+
+        this.Kakao = (Button) v.findViewById(R.id.kakao);
+
 
         int today = Integer.parseInt(currentDay.substring(6, 8));
         dayTextView.setText(Integer.toString(today));
@@ -127,6 +143,15 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
                 shareInstagram(shareImage);
+
+            }
+        });
+
+        this.Kakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                shareKakao(shareImage);
 
             }
         });
@@ -222,5 +247,106 @@ public class DetailFragment extends Fragment {
         }
     }
 
+    public void shareKakao(Bitmap bitmap) {
+        /*
+        TemplateParams params = FeedTemplate
+                .newBuilder(ContentObject.newBuilder(
+                        "디저트 사진",
+                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                        LinkObject.newBuilder()
+                                .setWebUrl("https://developers.kakao.com")
+                                .setMobileWebUrl("https://developers.kakao.com")
+                                .build())
+                        .setDescrption("아메리카노, 빵, 케익")
+                        .build())
+                .setSocial(SocialObject.newBuilder()
+                        .setLikeCount(10)
+                        .setCommentCount(20)
+                        .setSharedCount(30)
+                        .setViewCount(40)
+                        .build())
+                .addButton(new ButtonObject(
+                        "웹에서 보기",
+                        LinkObject.newBuilder()
+                                .setWebUrl("https://developers.kakao.com")
+                                .setMobileWebUrl("https://developers.kakao.com")
+                                .build()))
+                .addButton(new ButtonObject(
+                        "앱에서 보기",
+                        LinkObject.newBuilder()
+                                .setAndroidExecutionParams("key1=value1")
+                                .setIosExecutionParams("key1=value1")
+                                .build()))
+                .build();
+*/
+        String fileName = "share.png";
+        File filePath = shareManager.saveBitmap(bitmap, fileName);
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/*");
+        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        File imageFile = new File(filePath, fileName);
+
+        //File imageFile = new File("{로컬 이미지 파일 경로}");
+
+        //final String fileURL = null;
+        KakaoLinkService.getInstance()
+                .uploadImage(this.context, true, imageFile, new ResponseCallback<ImageUploadResponse>() {
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Log.e("KAKAO_API", "이미지 업로드 실패: " + errorResult);
+                    }
+
+                    @Override
+                    public void onSuccess(ImageUploadResponse result) {
+                        Log.i("KAKAO_API", "이미지 업로드 성공");
+
+                        Log.d("KAKAO_API", "URL: " + result.getOriginal().getUrl());
+
+                        // TODO: 템플릿 컨텐츠로 이미지 URL 입력
+                        String kYear = currentDay.substring(0,4);
+                        String kMonth = currentDay.substring(4,6);
+                        String kDate = currentDay.substring(6,8);
+
+                        TemplateParams params = FeedTemplate
+                                .newBuilder(ContentObject.newBuilder(
+                                        "나의 " + kYear + "년 " + kMonth + "월 " + kDate + "일" + "  감정 일기",
+                                        result.getOriginal().getUrl(),
+                                        LinkObject.newBuilder()
+                                                .setWebUrl("https://developers.kakao.com")
+                                                .setMobileWebUrl("https://developers.kakao.com")
+                                                .build())
+                                        .setDescrption(text)
+                                        .build())
+                                .addButton(new ButtonObject(
+                                        "앱에서 보기",
+                                        LinkObject.newBuilder()
+                                                .setAndroidExecutionParams("key1=value1")
+                                                .setIosExecutionParams("key1=value1")
+                                                .build()))
+                                .build();
+
+                        KakaoLinkService.getInstance()
+                                .sendDefault(context, params, new ResponseCallback<KakaoLinkResponse>() {
+                                    @Override
+                                    public void onFailure(ErrorResult errorResult) {
+                                        Log.e("KAKAO_API", "카카오링크 공유 실패: " + errorResult);
+                                    }
+
+                                    @Override
+                                    public void onSuccess(KakaoLinkResponse result) {
+                                        Log.i("KAKAO_API", "카카오링크 공유 성공");
+
+                                        // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+                                        Log.w("KAKAO_API", "warning messages: " + result.getWarningMsg());
+                                        Log.w("KAKAO_API", "argument messages: " + result.getArgumentMsg());
+                                    }
+                                });
+                    }
+                });
+
+
+
+    }
 
 }

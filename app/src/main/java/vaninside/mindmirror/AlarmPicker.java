@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -28,6 +29,8 @@ public class AlarmPicker extends Activity {
 
     private Button bSetTime = null;
     private TimePicker tTime = null;
+    int alarmHour = -1;
+    int alarmMin = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,11 @@ public class AlarmPicker extends Activity {
                 int minutes = tTime.getMinute();
                 // 시간이랑 분을 가져왔음.
                 setAlarm();
+                Intent resultData = new Intent();
+                resultData.putExtra("returnHour",hour);
+                resultData.putExtra("returnMin",minutes);
+                setResult(Activity.RESULT_OK,resultData);
+                Log.d("ResultPicker",hour + " " + minutes);
                 finish();
             }
         });
@@ -79,8 +87,8 @@ public class AlarmPicker extends Activity {
         // 설정이 있으면 그 값으로 대체 될 것이다.
         SharedPreferences sharedPreferences = getSharedPreferences("mind_key",MODE_PRIVATE);
 
-        int alarmHour = sharedPreferences.getInt("alarmHour",0);
-        int alarmMin = sharedPreferences.getInt("alarmMin",0);
+        alarmHour = sharedPreferences.getInt("alarmHour",0);
+        alarmMin = sharedPreferences.getInt("alarmMin",0);
 
         tTime.setHour(alarmHour);
         tTime.setMinute(alarmMin);
@@ -105,7 +113,10 @@ public class AlarmPicker extends Activity {
         //  Preference에 설정한 값 저장
         SharedPreferences.Editor editor = getSharedPreferences("mind_key", MODE_PRIVATE).edit();
         editor.putLong("nextNotifyTime", (long)calendar.getTimeInMillis());
-        editor.apply();
+        editor.putInt("alarmHour",tTime.getHour());
+        editor.putInt("alarmMin",tTime.getMinute());
+        //editor.apply();
+        editor.commit();
 
 
         Boolean dailyNotify = true; // 무조건 알람을 사용
@@ -120,7 +131,7 @@ public class AlarmPicker extends Activity {
         // 사용자가 매일 알람을 허용했다면
         if (dailyNotify) {
 
-
+            Log.d("Calendar2",calendar.getTime().toString());
             if (alarmManager != null) {
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),

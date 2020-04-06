@@ -1,26 +1,16 @@
 package vaninside.mindmirror;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 //import static com.kakao.util.helper.Utility.getPackageInfo;
 
@@ -118,6 +108,11 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
         bBackKey.setOnClickListener(LockerActivity.this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @Override
     public void onClick(View view) {

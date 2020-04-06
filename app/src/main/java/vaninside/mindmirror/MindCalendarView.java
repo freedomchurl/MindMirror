@@ -1,11 +1,10 @@
 package vaninside.mindmirror;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.AttributeSet;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.AttributedCharacterIterator;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 

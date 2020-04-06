@@ -5,9 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +105,7 @@ public class StatActivity extends AppCompatActivity {
         System.out.println("after: " + df.format(cal.getTime()));
 
         int targetDate = -1;
+        Log.d("Pos",pos + "");
         if(pos == 0) // 일주일
         {
             cal.add(Calendar.DATE,-7); //  7일을 뺸다.
@@ -135,6 +136,8 @@ public class StatActivity extends AppCompatActivity {
             targetDate = -1;
         }
 
+
+        Log.d("TargetDate",targetDate + "" );
         selectData(targetDate);
         // 다 되었다면, 여기서 데이터를 statData로 가공한다.
         calStatData();
@@ -154,6 +157,7 @@ public class StatActivity extends AppCompatActivity {
         for(int i=0;i<num;i++)
         {
             mindCount[this.mindList.get(i)-1]++;
+            Log.d("Emotion",this.mindList.get(i)-1 + "");
         }
 
         if(num!=0) {
@@ -162,18 +166,13 @@ public class StatActivity extends AppCompatActivity {
 
             this.mStatList.clear();
 
+
             for (int i = 0; i < 10; i++) {
                 if (mindCount[i] != 0)
                     mStatList.add(new StatData(i + 1, mindCount[i], num));
             }
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    adapter.notifyDataSetChanged();
-                }
-            });
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -183,7 +182,11 @@ public class StatActivity extends AppCompatActivity {
         int month = cal.get(Calendar.MONTH);
         int date = cal.get(Calendar.DATE);
 
-        return Integer.valueOf("" + year + month + date);
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
+        System.out.println("current: " + df.format(cal.getTime()));
+
+        //return Integer.valueOf("" + year + month + date);
+        return Integer.valueOf(df.format(cal.getTime()));
     }
 
     public void getTodayDate()
