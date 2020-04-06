@@ -12,19 +12,24 @@ public class ThemeUtil {
     public static final String DEFAULT_MODE = "default";
 
     public static void applyTheme(String themeColor) {
+
         switch (themeColor) {
             case LIGHT_MODE:
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Log.d("check","light mode");
                 break;
 
-            case DARK_MODE: {
+            case DARK_MODE:
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 Log.d("check", "dark mode");
+                Log.d("Check Mode", AppCompatDelegate.getDefaultNightMode() + " ");
                 break;
-            }
+
             default:
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
         }
+
+
     }
 }
