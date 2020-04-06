@@ -17,9 +17,8 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-
         SharedPreferences sharedPreferences = getSharedPreferences("mind_key",MODE_PRIVATE);
-        boolean isDarkMode = sharedPreferences.getBoolean("darkmode",false);
+        final boolean isDarkMode = sharedPreferences.getBoolean("darkmode",false);
 
         final boolean isLocked = sharedPreferences.getBoolean("lockmode",false);
 
@@ -35,6 +34,13 @@ public class IntroActivity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                 else
                     intent = new Intent(getApplicationContext(),LockerActivity.class);
+
+
+                if(isDarkMode == true)
+                    ThemeUtil.applyTheme(ThemeUtil.DARK_MODE);
+                else
+                    ThemeUtil.applyTheme(ThemeUtil.LIGHT_MODE);
+
 
                 startActivity(intent);
                 finish();

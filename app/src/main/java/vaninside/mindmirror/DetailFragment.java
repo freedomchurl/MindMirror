@@ -20,11 +20,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,12 +63,23 @@ public class DetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.detail, container, false);
 
-        context = getActivity();
-        ImageView mindImage = (ImageView) v.findViewById(R.id.mind_image);
-        TextView textView = (TextView) v.findViewById(R.id.detail_memo);
+        final View v = inflater.inflate(R.layout.detail, container, false);
         final LinearLayout mind_layout = (LinearLayout) v.findViewById(R.id.mind_layout);
+/*
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9) ;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width);
+        mind_layout.setLayoutParams(params);
+*/
+        context = getActivity();
+
+        ImageView mindImage = (ImageView) v.findViewById(R.id.mind_image);
+    /*
+        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params2.gravity = Gravity.CENTER;
+        mindImage.setLayoutParams(params2);
+      */
+        TextView textView = (TextView) v.findViewById(R.id.detail_memo);
 
         if (getArguments() != null)
             currentDay = getArguments().getString("currentDay");

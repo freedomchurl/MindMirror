@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,15 +27,23 @@ public class CreateViewToBitmap {
     public static Bitmap createViewToBitmap(Context context, View view) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        //view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.buildDrawingCache();
 
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
+        Bitmap sourceBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(sourceBitmap);
         view.draw(canvas);
 
-        return bitmap;
+        Bitmap resultBitmap= Bitmap.createBitmap(sourceBitmap.getHeight(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(resultBitmap);
+        canvas2.drawColor(Color.parseColor("#eaeae9"));
+
+        Rect sourceRect = new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
+        Rect destinationRect = new Rect((resultBitmap.getWidth() - sourceBitmap.getWidth())/2, 0, (resultBitmap.getWidth() + sourceBitmap.getWidth())/2, sourceBitmap.getHeight());
+        canvas2.drawBitmap(sourceBitmap, sourceRect, destinationRect, null);
+
+    return resultBitmap;
     }
 
     public static File saveBitmap(Bitmap bitmap, String fileName){

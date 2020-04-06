@@ -167,7 +167,13 @@ public class StatActivity extends AppCompatActivity {
                     mStatList.add(new StatData(i + 1, mindCount[i], num));
             }
 
-            adapter.notifyAll();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    adapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 

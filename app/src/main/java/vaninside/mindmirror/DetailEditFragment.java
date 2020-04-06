@@ -166,6 +166,10 @@ public class DetailEditFragment extends Fragment {
 
 
 
+    public int getMind(){
+        return mind;
+    }
+
     public void saveData(){
         text = editText.getText().toString();
 

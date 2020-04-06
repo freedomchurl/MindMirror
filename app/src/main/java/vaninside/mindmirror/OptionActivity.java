@@ -137,6 +137,11 @@ public class OptionActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("darkmode",isDarkMode); // key, value를 이용하여 저장하는 형
                 editor.commit();
+
+                if(isDarkMode == true)
+                    ThemeUtil.applyTheme(ThemeUtil.DARK_MODE);
+                else
+                    ThemeUtil.applyTheme(ThemeUtil.LIGHT_MODE);
             }
         });
 
