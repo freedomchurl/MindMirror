@@ -85,6 +85,8 @@ public class StatAdapter extends RecyclerView.Adapter {
             progressBar.setMax(data.getTotal());
             progressBar.setProgress(data.getNum());
 
+
+
             if(data.getEmotion() == 1)
                 mindType.setImageResource(R.drawable.new_emotion_2);
                 //mindType.setBackgroundColor(Color.RED);
