@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -202,6 +203,19 @@ public class OptionActivity extends AppCompatActivity {
             }
             else
                 lockSwitch.setChecked(false);
+        }
+        else if(requestCode == 3)
+        {
+            if(resultCode == Activity.RESULT_OK)
+            {
+                this.alarmHour = data.getIntExtra("returnHour",0);
+                this.alarmMin = data.getIntExtra("returnMin",0);
+
+                Log.d("ResultFromPicker",alarmHour + " " + alarmMin);
+
+                tAlarmTime.setText("매일 " + alarmHour + ":" + alarmMin);
+
+            }
         }
     }
 
