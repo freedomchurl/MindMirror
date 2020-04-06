@@ -2,6 +2,8 @@ package vaninside.mindmirror;
 
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;

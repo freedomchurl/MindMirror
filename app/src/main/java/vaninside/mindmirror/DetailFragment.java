@@ -92,7 +92,7 @@ public class DetailFragment extends Fragment {
         mindImage.setLayoutParams(params2);
       */
         TextView textView = (TextView) v.findViewById(R.id.detail_memo);
-        final LinearLayout mind_layout = (LinearLayout) v.findViewById(R.id.mind_layout);
+        //final LinearLayout mind_layout = (LinearLayout) v.findViewById(R.id.mind_layout);
 
         if (getArguments() != null)
             currentDay = getArguments().getString("currentDay");

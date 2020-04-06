@@ -1,8 +1,10 @@
 package vaninside.mindmirror;
 
-import android.os.Build;
-import android.support.v7.app.AppCompatDelegate;
+//import android.os.Build;
+//import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class ThemeUtil {
     public static final String LIGHT_MODE = "light";
