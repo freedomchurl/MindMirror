@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 /* Main Page with Mind Calendar and Menu */
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         cal = new MindCalendarView(this, calLayout);
 
-        Button statButton = (Button) findViewById(R.id.statbutton);
-        Button settingButton = (Button) findViewById(R.id.settingbutton);
+        ImageButton statButton = (ImageButton) findViewById(R.id.statbutton);
+        ImageButton settingButton = (ImageButton) findViewById(R.id.settingbutton);
 
         statButton.setOnClickListener(new View.OnClickListener() {
             @Override

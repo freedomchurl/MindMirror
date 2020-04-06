@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             android:orientation="horizontal">
 
             <ImageButton
@@ -22,26 +22,30 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_media_previous" />
+                android:scaleType="centerInside"
+                android:background="@color/colorTitle"
+                android:padding="10dp"
+                app:srcCompat="@drawable/back"/>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:background="#F4E7E7"
+                android:textColor="#ffffff"
                 android:gravity="center"
+                android:backgroundTint="@color/colorTitle"
+                android:background="@color/colorTitle"
+                android:fontFamily="@font/uto_gothic"
                 android:text=" 설 정"
-                app:autoSizeMaxTextSize="15dp"
-                app:autoSizeMinTextSize="10dp"
-                app:autoSizeTextType="uniform" />
+                android:textSize="18dp"/>
 
-            <Space
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#F8E8E8"
-                android:backgroundTint="#F8EBEB" />
+                android:background="@color/colorTitle"
+                android:backgroundTint="@color/colorTitle" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,6 +68,9 @@
                     android:background="@drawable/all_border"
                     android:paddingLeft="50dp"
                     android:paddingRight="30dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/font_basic"
+                    android:fontFamily="@font/uto_gothic"
                     android:text="다크 모드 설정" />
 
             </LinearLayout>
@@ -82,6 +89,9 @@
                     android:background="@drawable/all_border"
                     android:paddingLeft="50dp"
                     android:paddingRight="30dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/font_basic"
+                    android:fontFamily="@font/uto_gothic"
                     android:text="알림 설정" />
             </LinearLayout>
 
@@ -96,8 +106,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textColor="@color/font_basic"
                     android:background="@drawable/all_border"
                     android:gravity="center"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/uto_gothic"
                     android:text="매일 12:00 PM" />
             </LinearLayout>
 
@@ -116,7 +129,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/all_border"
                     android:paddingLeft="50dp"
+                    android:textColor="@color/font_basic"
                     android:paddingRight="30dp"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/uto_gothic"
                     android:text="잠금 설정" />
 
             </LinearLayout>
@@ -129,28 +145,36 @@
                 android:background="@drawable/all_border"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
                     android:gravity="center"
+                    android:textColor="@color/font_basic"
+                    android:textSize="14dp"
+                    android:layout_marginRight="75dp"
+                    android:fontFamily="@font/uto_gothic"
                     android:text="개발자 인스타그램" />
+
+                <ImageButton
+                    android:id="@+id/instagram_my"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#ffffff"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/instagram" />
+
             </LinearLayout>
 
         </LinearLayout>
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6" />
+            android:background="#fffff9"
+            android:layout_weight="9" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,11 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -51,6 +54,9 @@ public class StatActivity extends AppCompatActivity {
     public ArrayAdapter<String> arrayAdapter;
     private Spinner spinner;
     public int todayDate = 0;
+
+    private ImageButton backtoMain = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,6 +227,15 @@ public class StatActivity extends AppCompatActivity {
     }
 
     private void init(){
+
+        this.backtoMain = (ImageButton) findViewById(R.id.stat_back);
+        this.backtoMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.statRecycler);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

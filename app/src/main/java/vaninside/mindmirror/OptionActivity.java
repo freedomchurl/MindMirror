@@ -42,9 +42,10 @@ public class OptionActivity extends AppCompatActivity {
     public boolean isLocked = false;
 
     public int alarmHour = 0;
-        public int alarmMin = 0;
+    public int alarmMin = 0;
 
     public LinearLayout instLayout = null;
+    public ImageButton instB = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,8 @@ public class OptionActivity extends AppCompatActivity {
         darkSwitch = (Switch) findViewById(R.id.darkSwitch);
         lockSwitch = (Switch) findViewById(R.id.lockSwitch);
 
+        instB = (ImageButton) findViewById(R.id.instagram_my);
+
         InitDB(); // DB로부터 Setting 초기화.
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +106,14 @@ public class OptionActivity extends AppCompatActivity {
             }
         });
 
+        instB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://www.instagram.com/vaninside");
+                Intent it  = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(it);
+            }
+        });
 
         tAlarmTime.setText("매일 " + alarmHour + ":" + alarmMin);
         tAlarmTime.setOnClickListener(new View.OnClickListener() {

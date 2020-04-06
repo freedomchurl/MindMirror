@@ -28,6 +28,7 @@
             <TextView
                 android:id="@+id/enterPassText"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/cafe24oneprettynight"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="비밀번호를 입력하세요."
