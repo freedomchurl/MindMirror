@@ -3,6 +3,8 @@ package vaninside.mindmirror;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +87,8 @@ public class StatAdapter extends RecyclerView.Adapter {
             progressBar.setMax(data.getTotal());
             progressBar.setProgress(data.getNum());
 
+
+            Log.d("Data",data.getEmotion() + "");
             if(data.getEmotion() == 1)
                 mindType.setImageResource(R.drawable.new_emotion_2);
             else if(data.getEmotion() == 2)

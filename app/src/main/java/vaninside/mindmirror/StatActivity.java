@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +27,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import vaninside.mindmirror.Model.StatData;
 
@@ -147,29 +153,37 @@ public class StatActivity extends AppCompatActivity {
     {
         int num = this.mindList.size(); // size를 가져오고.
 
-        Integer mindCount [] = new Integer[10];
+        //Map<Integer,Integer> mindCount [] = new Map[10];
+        StatData mindCount[] = new StatData[10];
 
         for(int i =0;i<10;i++)
         {
-            mindCount[i] = new Integer(0);
+            mindCount[i] = new StatData(i+1,0,num);
+
         }
 
         for(int i=0;i<num;i++)
         {
-            mindCount[this.mindList.get(i)-1]++;
-            Log.d("Emotion",this.mindList.get(i)-1 + "");
+            int mindtemp = mindCount[this.mindList.get(i)-1].getNum();
+            Log.d("Counter of Emotion",mindtemp + "");
+            mindCount[this.mindList.get(i)-1].setNum(++mindtemp);
+            Log.d("Emotion",this.mindList.get(i)-1 + "" + " " + mindtemp);
         }
 
         if(num!=0) {
-            Arrays.sort(mindCount, Collections.reverseOrder());
+            Arrays.sort(mindCount);
 
 
             this.mStatList.clear();
 
 
             for (int i = 0; i < 10; i++) {
-                if (mindCount[i] != 0)
-                    mStatList.add(new StatData(i + 1, mindCount[i], num));
+                Log.d("Counter",mindCount[i].getEmotion() + " " + mindCount[i].getNum());
+                if (mindCount[i].getNum() != 0) {
+                    Log.d("JJ",(i+1) + "");
+                    mStatList.add(mindCount[i]);
+                }
+
             }
 
             adapter.notifyDataSetChanged();
@@ -236,7 +250,7 @@ public class StatActivity extends AppCompatActivity {
                         //테이블에서 두개의 컬럼값을 가져와서
                         String type = c.getString(c.getColumnIndex("mind"));
                         //String Phone = c.getString(c.getColumnIndex("phone"));
-
+                        Log.d("JiminPretty",type);
                         this.mindList.add(Integer.parseInt(type));
                         // List 에 넣는다.
                         //HashMap에 넣습니다.
