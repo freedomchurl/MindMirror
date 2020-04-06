@@ -332,7 +332,7 @@ public class DetailFragment extends Fragment {
                                     public void onFailure(ErrorResult errorResult) {
                                         Log.e("KAKAO_API", "카카오링크 공유 실패: " + errorResult);
                                     }
-
+//ddd
                                     @Override
                                     public void onSuccess(KakaoLinkResponse result) {
                                         Log.i("KAKAO_API", "카카오링크 공유 성공");
