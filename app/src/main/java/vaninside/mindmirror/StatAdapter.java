@@ -87,7 +87,6 @@ public class StatAdapter extends RecyclerView.Adapter {
 
             if(data.getEmotion() == 1)
                 mindType.setImageResource(R.drawable.new_emotion_2);
-                //mindType.setBackgroundColor(Color.RED);
             else if(data.getEmotion() == 2)
                 mindType.setImageResource(R.drawable.new_emotion_3);
             else if(data.getEmotion() == 3)

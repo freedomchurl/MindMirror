@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
         int width = (int) (display.getWidth() * 0.9);
-        int height = (int) (display.getHeight() * 0.9);  //Display 사이즈의 90%
+        int height = (int) (display.getHeight() * 0.7);  //Display 사이즈의 90%
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
 

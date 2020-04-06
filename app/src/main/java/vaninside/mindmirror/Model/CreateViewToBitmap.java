@@ -35,12 +35,12 @@ public class CreateViewToBitmap {
         Canvas canvas = new Canvas(sourceBitmap);
         view.draw(canvas);
 
-        Bitmap resultBitmap= Bitmap.createBitmap(sourceBitmap.getHeight(), sourceBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap resultBitmap= Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getWidth(), Bitmap.Config.ARGB_8888);
         Canvas canvas2 = new Canvas(resultBitmap);
         canvas2.drawColor(Color.parseColor("#eaeae9"));
 
         Rect sourceRect = new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
-        Rect destinationRect = new Rect((resultBitmap.getWidth() - sourceBitmap.getWidth())/2, 0, (resultBitmap.getWidth() + sourceBitmap.getWidth())/2, sourceBitmap.getHeight());
+        Rect destinationRect = new Rect((resultBitmap.getWidth() - sourceBitmap.getWidth())/2, resultBitmap.getHeight()-sourceBitmap.getHeight(), (resultBitmap.getWidth() + sourceBitmap.getWidth())/2, resultBitmap.getHeight());
         canvas2.drawBitmap(sourceBitmap, sourceRect, destinationRect, null);
 
     return resultBitmap;

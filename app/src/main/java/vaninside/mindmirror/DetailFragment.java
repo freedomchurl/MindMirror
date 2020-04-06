@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,9 +67,9 @@ public class DetailFragment extends Fragment {
 
     private TextView dayTextView;
     private TextView dayOfweekTextView;
-    private Button instagram;
+    private ImageButton instagram;
 
-    private Button Kakao;
+    private ImageButton Kakao;
 
     CreateViewToBitmap shareManager;
 
@@ -99,9 +100,9 @@ public class DetailFragment extends Fragment {
 
         dayTextView = (TextView) v.findViewById(R.id.day_textview);
         dayOfweekTextView = (TextView) v.findViewById(R.id.dayofweek_textview);
-        instagram = (Button) v.findViewById(R.id.instagram);
+        instagram = (ImageButton) v.findViewById(R.id.instagram);
 
-        this.Kakao = (Button) v.findViewById(R.id.kakao);
+        this.Kakao = (ImageButton) v.findViewById(R.id.kakao);
 
 
         int today = Integer.parseInt(currentDay.substring(6, 8));
@@ -141,7 +142,11 @@ public class DetailFragment extends Fragment {
         instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //dayTextView.setVisibility(View.INVISIBLE);
+                //dayOfweekTextView.setVisibility(View.INVISIBLE);
                 Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                //dayTextView.setVisibility(View.VISIBLE);
+                //dayOfweekTextView.setVisibility(View.VISIBLE);
                 shareInstagram(shareImage);
 
             }
@@ -150,7 +155,11 @@ public class DetailFragment extends Fragment {
         this.Kakao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //dayTextView.setVisibility(View.INVISIBLE);
+                //dayOfweekTextView.setVisibility(View.INVISIBLE);
                 Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                //dayTextView.setVisibility(View.VISIBLE);
+                //dayOfweekTextView.setVisibility(View.VISIBLE);
                 shareKakao(shareImage);
 
             }
