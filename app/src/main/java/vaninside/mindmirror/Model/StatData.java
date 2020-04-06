@@ -1,6 +1,6 @@
 package vaninside.mindmirror.Model;
 
-public class StatData {
+public class StatData implements Comparable<StatData>{
     //private int resId;
     private int emotion; // 무슨 표정인지.
     private int num; //몇개 있는지
@@ -37,4 +37,15 @@ public class StatData {
         this.num = i;
     }
 
+    @Override
+    public int compareTo(StatData o) {
+        if (this.num < o.num) {
+            return 1;
+        } else if (this.num == o.num) {
+            return 0;
+        } else {
+            return -1;
+        }
+
+    }
 }
