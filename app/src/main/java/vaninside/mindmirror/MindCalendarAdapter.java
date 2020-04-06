@@ -212,6 +212,10 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                             Mindimage.setImageResource(R.drawable.new_emotion_2);
                         else if (mind == 2)
                             Mindimage.setImageResource(R.drawable.new_emotion_3);
+                        else if (mind == 3)
+                            Mindimage.setImageResource(R.drawable.new_emotion_4);
+                        else if (mind == 4)
+                            Mindimage.setImageResource(R.drawable.new_emotion_5);
                     }
 
                     itemView.setOnClickListener(new View.OnClickListener() {

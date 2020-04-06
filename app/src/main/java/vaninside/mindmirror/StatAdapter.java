@@ -92,6 +92,10 @@ public class StatAdapter extends RecyclerView.Adapter {
                 //mindType.setBackgroundColor(Color.RED);
             else if(data.getEmotion() == 2)
                 mindType.setImageResource(R.drawable.new_emotion_3);
+            else if(data.getEmotion() == 3)
+                mindType.setImageResource(R.drawable.new_emotion_4);
+            else if(data.getEmotion() == 4)
+                mindType.setImageResource(R.drawable.new_emotion_5);
         }
     }
 

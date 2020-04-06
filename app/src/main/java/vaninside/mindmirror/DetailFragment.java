@@ -176,6 +176,10 @@ public class DetailFragment extends Fragment {
                     mindImage.setImageResource(R.drawable.new_emotion_2);
                 else if (mind == 2)
                     mindImage.setImageResource(R.drawable.new_emotion_3);
+                else if (mind == 3)
+                    mindImage.setImageResource(R.drawable.new_emotion_4);
+                else if (mind == 4)
+                    mindImage.setImageResource(R.drawable.new_emotion_5);
             }
 
             textView.setText(text);

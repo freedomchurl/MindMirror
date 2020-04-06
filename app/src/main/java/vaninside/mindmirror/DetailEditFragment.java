@@ -34,6 +34,7 @@ public class DetailEditFragment extends Fragment {
     ImageView imageView1;
     ImageView imageView2;
     ImageView imageView3;
+    ImageView imageView4;
     boolean imageEditCheck = false;
     View.OnClickListener emotionClick;
     boolean isExist = false;
@@ -55,6 +56,7 @@ public class DetailEditFragment extends Fragment {
         imageView1 = (ImageView) v.findViewById(R.id.mind_1);
         imageView2 = (ImageView) v.findViewById(R.id.mind_2);
         imageView3 = (ImageView) v.findViewById(R.id.mind_3);
+        imageView4 = (ImageView) v.findViewById(R.id.mind_4);
 
         dayTextView = (TextView) v.findViewById(R.id.edit_day_textview);
         dayOfweekTextView = (TextView) v.findViewById(R.id.edit_dayofweek_textview);
@@ -119,6 +121,10 @@ public class DetailEditFragment extends Fragment {
                 imageView.setImageResource(R.drawable.new_emotion_2);
             else if (mind == 2)
                 imageView.setImageResource(R.drawable.new_emotion_3);
+            else if (mind == 3)
+                imageView.setImageResource(R.drawable.new_emotion_4);
+            else if (mind == 4)
+                imageView.setImageResource(R.drawable.new_emotion_5);
 
         }}
 
@@ -130,12 +136,14 @@ public class DetailEditFragment extends Fragment {
                     imageView1.setVisibility(View.INVISIBLE);
                     imageView2.setVisibility(View.INVISIBLE);
                     imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     imageEditCheck = false;
                 }
                 else { // 버튼 누르면 옵션 보이게
                     imageView1.setVisibility(View.VISIBLE);
                     imageView2.setVisibility(View.VISIBLE);
                     imageView3.setVisibility(View.VISIBLE);
+                    imageView4.setVisibility(View.VISIBLE);
                     imageEditCheck = true;
                 }
             }
@@ -154,6 +162,10 @@ public class DetailEditFragment extends Fragment {
                 else if(v.getId() == R.id.mind_3){
                     mind=3;
                     imageView.setImageResource(R.drawable.new_emotion_4);}
+                else if(v.getId() == R.id.mind_4){
+                    mind=4;
+                    imageView.setImageResource(R.drawable.new_emotion_5);}
+
 
             }
 
@@ -163,6 +175,7 @@ public class DetailEditFragment extends Fragment {
         imageView1.setOnClickListener(emotionClick);
         imageView2.setOnClickListener(emotionClick);
         imageView3.setOnClickListener(emotionClick);
+        imageView4.setOnClickListener(emotionClick);
 
         db.close();
         return v;
