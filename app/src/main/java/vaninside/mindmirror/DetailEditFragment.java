@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,11 @@ public class DetailEditFragment extends Fragment {
         dayTextView = (TextView) v.findViewById(R.id.edit_day_textview);
         dayOfweekTextView = (TextView) v.findViewById(R.id.edit_dayofweek_textview);
 
+        Log.d("Test222",currentDay + " 33");
+
         int today = Integer.parseInt(currentDay.substring(6,8));
+
+
         dayTextView.setText(Integer.toString(today));
 
         GregorianCalendar myCalendar = new GregorianCalendar(Integer.parseInt(currentDay.substring(0,4)), Integer.parseInt(currentDay.substring(4,6))-1, Integer.parseInt(currentDay.substring(6,8)), 0, 0, 0);
