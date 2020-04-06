@@ -92,6 +92,9 @@ public class DetailActivity extends AppCompatActivity {
                         switchFragment();
                     }
                     // Edit Page should save data.
+                } else {
+                    switchFragment();
+
                 }
             }
         });
