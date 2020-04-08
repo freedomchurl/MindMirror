@@ -25,7 +25,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AlarmPicker extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AlarmPicker extends AppCompatActivity {
 
     private Button bSetTime = null;
     private TimePicker tTime = null;
@@ -34,7 +36,7 @@ public class AlarmPicker extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         layoutParams.dimAmount = 0.7f;
@@ -48,7 +50,7 @@ public class AlarmPicker extends Activity {
         Display dp = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         // 2. 화면 비율 설정
         int width = (int)(dp.getWidth()*0.8);
-        int height = (int)(dp.getHeight()*0.7);
+        int height = (int)(dp.getHeight()*0.6);
         // 3. 현재 화면에 적용
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
