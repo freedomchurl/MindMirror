@@ -16,6 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/uto_gothic"
+        android:textColor="@color/intro_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tool:text="00" />

@@ -57,7 +57,7 @@
                 android:hint="메모를 작성하세요"
                 android:textColor="@color/font_basic"
                 android:textColorHint="@color/color_gray"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textAlignment="center"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"

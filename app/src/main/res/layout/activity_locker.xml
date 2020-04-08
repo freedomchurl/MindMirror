@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/cheol"
+    android:background="@color/sketchColor"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -35,7 +35,8 @@
                 android:text="비밀번호를 입력하세요."
                 app:autoSizeMaxTextSize="22dp"
                 app:autoSizeMinTextSize="20dp"
-                app:autoSizeTextType="uniform" />
+                app:autoSizeTextType="uniform"
+                android:textColor="@color/intro_text"/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,6 +119,7 @@
 
                 <Button
                     android:id="@+id/keypad1"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/button_number"
@@ -127,6 +129,7 @@
 
                 <Button
                     android:id="@+id/keypad2"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/button_number"
@@ -136,6 +139,7 @@
 
                 <Button
                     android:id="@+id/keypad3"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -159,6 +163,7 @@
                     android:background="@drawable/button_number"
                     android:text="4"
                     android:textSize="18dp"
+                    android:textColor="@color/intro_text"
                     app:srcCompat="@android:drawable/btn_star_big_on" />
 
                 <Button
@@ -166,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textColor="@color/intro_text"
                     android:background="@drawable/button_number"
                     android:text="5"
                     android:textSize="18dp"
@@ -173,6 +179,7 @@
 
                 <Button
                     android:id="@+id/keypad6"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -192,6 +199,7 @@
 
                 <Button
                     android:id="@+id/keypad7"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -202,6 +210,7 @@
 
                 <Button
                     android:id="@+id/keypad8"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -212,10 +221,11 @@
 
                 <Button
                     android:id="@+id/keypad9"
+                    android:textColor="@color/intro_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/all_border"
+                    android:background="@drawable/button_number"
                     android:text="9"
                     android:textSize="18dp"
                     app:srcCompat="@android:drawable/btn_star_big_on" />
@@ -236,6 +246,7 @@
 
                 <Button
                     android:id="@+id/keypad0"
+                    android:textColor="@color/intro_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -246,6 +257,7 @@
 
                 <Button
                     android:id="@+id/keypadback"
+                    android:textColor="@color/intro_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
