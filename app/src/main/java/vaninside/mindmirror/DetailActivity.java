@@ -16,6 +16,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import vaninside.mindmirror.Model.CreateViewToBitmap;
@@ -36,8 +37,8 @@ public class DetailActivity extends AppCompatActivity {
     private int mode = 0;
 
     private String currentDay;
-    private Button button; // edit, finish button. Fragment change.
-    Button deleteButton;
+    private ImageButton button; // edit, finish button. Fragment change.
+    private ImageButton deleteButton;
 
     SQLiteDatabase db;
 
@@ -74,12 +75,12 @@ public class DetailActivity extends AppCompatActivity {
         getWindow().getAttributes().height = height;
 
         // Finish or Edit Button
-        button = (Button) findViewById(R.id.mybutton);
+        button = (ImageButton) findViewById(R.id.mybutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (button.getText() == "FINISH") {
 
+                if ((Integer) button.getTag() == 0) {
                     if(((DetailEditFragment) getSupportFragmentManager().findFragmentById(R.id.frame)).getMind() == 0){
                         Toast.makeText(getApplicationContext(), "감정을 선택하세요.", Toast.LENGTH_LONG).show();
                     }
@@ -99,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Button exitButton = (Button) findViewById(R.id.exitbutton);
+        ImageButton exitButton = (ImageButton) findViewById(R.id.exitbutton);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        deleteButton = (Button) findViewById(R.id.deletebutton);
+        deleteButton = (ImageButton) findViewById(R.id.deletebutton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +135,8 @@ public class DetailActivity extends AppCompatActivity {
         if (mode == 0) {
             transaction.replace(R.id.frame, fragmentB).commitAllowingStateLoss();
             isFragmentB = true;
-            button.setText("FINISH");
+            button.setTag(0);
+            button.setImageResource(R.drawable.finish);
             if (isExist)
                 deleteButton.setVisibility(View.VISIBLE);
             else
@@ -142,7 +144,9 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             transaction.replace(R.id.frame, fragmentA).commitAllowingStateLoss();
             isFragmentB = false;
-            button.setText("EDIT");
+
+            button.setTag(1);
+            button.setImageResource(R.drawable.edit);
             deleteButton.setVisibility(View.VISIBLE);
         }
     }
@@ -153,11 +157,13 @@ public class DetailActivity extends AppCompatActivity {
         Fragment fr;
         if (isFragmentB) {
             fr = new DetailFragment();
-            button.setText("EDIT");
+            button.setTag(1);
+            button.setImageResource(R.drawable.edit);
             deleteButton.setVisibility(View.VISIBLE);
         } else {
             fr = new DetailEditFragment();
-            button.setText("FINISH");
+            button.setTag(0);
+            button.setImageResource(R.drawable.finish);
             deleteButton.setVisibility(View.INVISIBLE);
         }
 

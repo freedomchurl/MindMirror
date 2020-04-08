@@ -156,7 +156,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
     private class DayViewHolder extends RecyclerView.ViewHolder {
 
         TextView thisDate;
-        ImageView Mindimage;
+        ImageView imageview;
 
         public DayViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -166,7 +166,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
 
         public void initView(View v) {
             thisDate = (TextView) v.findViewById(R.id.item_day);
-            Mindimage = (ImageView) v.findViewById(R.id.mind_image);
+            imageview = (ImageView) v.findViewById(R.id.mind_image);
         }
 
         public void bind(ViewModel model) {
@@ -191,8 +191,8 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                 if(cursor.getCount() == 0) { // NO data.
                     intent.putExtra("mode", 0);
                     if(currentdayDate.getTime() <= today.getTime()){ // 오늘 이전의 날짜일 경우
-                        Mindimage.setImageResource(R.drawable.empty_emotion);
-                        Mindimage.setVisibility(View.INVISIBLE);
+                        imageview.setImageResource(R.drawable.empty_emotion);
+                        imageview.setVisibility(View.INVISIBLE);
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -201,22 +201,34 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                             }
                         });
                     }else { // 오늘 이후이면 표시 안함.
-                        Mindimage.setImageResource(R.drawable.test_emotion);
+                        imageview.setImageResource(R.drawable.test_emotion);
                     }
                 } else {
                     intent.putExtra("mode", 1);
                     while (cursor.moveToNext()) {
                         mind = cursor.getInt(2);
-                        Mindimage.setVisibility(View.VISIBLE);
+                        imageview.setVisibility(View.VISIBLE);
                         // ---------- Mind 에 따라 알맞은 이모티콘 표시
-                        if(mind == 1)
-                            Mindimage.setImageResource(R.drawable.new_emotion_2);
+                        if (mind == 1)
+                            imageview.setImageResource(R.drawable.new_emotion_1);
                         else if (mind == 2)
-                            Mindimage.setImageResource(R.drawable.new_emotion_3);
+                            imageview.setImageResource(R.drawable.new_emotion_2);
                         else if (mind == 3)
-                            Mindimage.setImageResource(R.drawable.new_emotion_4);
+                            imageview.setImageResource(R.drawable.new_emotion_3);
                         else if (mind == 4)
-                            Mindimage.setImageResource(R.drawable.new_emotion_5);
+                            imageview.setImageResource(R.drawable.new_emotion_4);
+                        else if (mind == 5)
+                            imageview.setImageResource(R.drawable.new_emotion_5);
+                        else if (mind == 6)
+                            imageview.setImageResource(R.drawable.new_emotion_6);
+                        else if (mind == 7)
+                            imageview.setImageResource(R.drawable.new_emotion_7);
+                        else if (mind == 8)
+                            imageview.setImageResource(R.drawable.new_emotion_8);
+                        else if (mind == 9)
+                            imageview.setImageResource(R.drawable.new_emotion_9);
+                        else if (mind == 10)
+                            imageview.setImageResource(R.drawable.new_emotion_10);
                     }
 
                     itemView.setOnClickListener(new View.OnClickListener() {

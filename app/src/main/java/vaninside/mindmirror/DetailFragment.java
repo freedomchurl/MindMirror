@@ -179,16 +179,26 @@ public class DetailFragment extends Fragment {
                 }
 
                 // ----------------------- 내 감정에 따라 감정 사진 설정.
-                if (mind == 0)
-                    mindImage.setImageResource(R.drawable.test_emotion);
-                else if (mind == 1)
-                    mindImage.setImageResource(R.drawable.new_emotion_2);
+                if (mind == 1)
+                    mindImage.setImageResource(R.drawable.new_emotion_1);
                 else if (mind == 2)
-                    mindImage.setImageResource(R.drawable.new_emotion_3);
+                    mindImage.setImageResource(R.drawable.new_emotion_2);
                 else if (mind == 3)
-                    mindImage.setImageResource(R.drawable.new_emotion_4);
+                    mindImage.setImageResource(R.drawable.new_emotion_3);
                 else if (mind == 4)
+                    mindImage.setImageResource(R.drawable.new_emotion_4);
+                else if (mind == 5)
                     mindImage.setImageResource(R.drawable.new_emotion_5);
+                else if (mind == 6)
+                    mindImage.setImageResource(R.drawable.new_emotion_6);
+                else if (mind == 7)
+                    mindImage.setImageResource(R.drawable.new_emotion_7);
+                else if (mind == 8)
+                    mindImage.setImageResource(R.drawable.new_emotion_8);
+                else if (mind == 9)
+                    mindImage.setImageResource(R.drawable.new_emotion_9);
+                else if (mind == 10)
+                    mindImage.setImageResource(R.drawable.new_emotion_10);
             }
 
             textView.setText(text);

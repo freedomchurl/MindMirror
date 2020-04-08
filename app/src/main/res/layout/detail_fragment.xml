@@ -2,39 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
       android:background="@color/colorTitle">
-    <Button
-      android:id="@+id/exitbutton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="X"
-      android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/exitbutton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:background="#00000000"
+        android:layout_weight="1"
+        android:padding="12dp"
+        app:srcCompat="@drawable/exit"/>
     <Space
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
-    <Button
+        android:layout_weight="5"/>
+    <ImageButton
         android:id="@+id/deletebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:textSize="20sp" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:background="#00000000"
+        android:layout_weight="1"
+        android:padding="10dp"
+        app:srcCompat="@drawable/delete"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/mybutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:textSize="20sp" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:background="#00000000"
+        android:layout_weight="1"
+        android:padding="10dp"
+        app:srcCompat="@drawable/edit"/>
   </LinearLayout>
   <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:layout_weight="7"
+      android:layout_weight="11"
       android:id="@+id/frame">
 
   </FrameLayout>

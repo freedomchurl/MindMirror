@@ -4,6 +4,6 @@
     android:id="@+id/item_layout"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@drawable/all_border">
+    android:background="@drawable/empty_border">
 
 </RelativeLayout>
