@@ -18,6 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import vaninside.mindmirror.R;
+
 public class CreateViewToBitmap {
 
     public CreateViewToBitmap(){
@@ -37,7 +39,7 @@ public class CreateViewToBitmap {
 
         Bitmap resultBitmap= Bitmap.createBitmap(sourceBitmap.getWidth(), sourceBitmap.getWidth(), Bitmap.Config.ARGB_8888);
         Canvas canvas2 = new Canvas(resultBitmap);
-        canvas2.drawColor(Color.parseColor("#eaeae9"));
+        canvas2.drawColor(context.getResources().getColor(R.color.sketchColor));
 
         Rect sourceRect = new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
         Rect destinationRect = new Rect((resultBitmap.getWidth() - sourceBitmap.getWidth())/2, resultBitmap.getHeight()-sourceBitmap.getHeight(), (resultBitmap.getWidth() + sourceBitmap.getWidth())/2, resultBitmap.getHeight());
