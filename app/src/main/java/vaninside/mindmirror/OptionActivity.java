@@ -176,6 +176,12 @@ public class OptionActivity extends AppCompatActivity {
                     ThemeUtil.applyTheme(ThemeUtil.DARK_MODE);
                 else
                     ThemeUtil.applyTheme(ThemeUtil.LIGHT_MODE);
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
+
             }
         });
 

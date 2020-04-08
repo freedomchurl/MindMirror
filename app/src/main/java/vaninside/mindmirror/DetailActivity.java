@@ -1,6 +1,7 @@
 package vaninside.mindmirror;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.appcompat.app.AlertDialog;
@@ -40,11 +41,12 @@ public class DetailActivity extends AppCompatActivity {
     private String currentDay;
     private ImageButton button; // edit, finish button. Fragment change.
     private ImageButton deleteButton;
-
+    private ImageButton exitButton;
     SQLiteDatabase db;
 
     private boolean isExist = false;
 
+    private boolean isDark = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,6 +55,15 @@ public class DetailActivity extends AppCompatActivity {
         //setTheme(android.R.style.Theme_NoTitleBar);
         // get currentDay Info
         currentDay = getIntent().getStringExtra("currentDay");
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("mind_key", MODE_PRIVATE);
+
+        //저장을 하기위해 editor를 이용하여 값을 저장시켜준다.
+        //SharedPreferences.Editor editor = sharedPreferences.edit();
+        //String text = editText.getText().toString(); // 사용자가 입력한 저장할 데이터
+        isDark = sharedPreferences.getBoolean("darkmode", false);
+
 
         setContentView(R.layout.detail_fragment);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -104,13 +115,19 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton exitButton = (ImageButton) findViewById(R.id.exitbutton);
+        exitButton = (ImageButton) findViewById(R.id.exitbutton);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        if(isDark == false)
+            exitButton.setImageResource(R.drawable.exit);
+        else
+            exitButton.setImageResource(R.drawable.cancel_button);
+
 
         deleteButton = (ImageButton) findViewById(R.id.deletebutton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +138,10 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        if(isDark == false)
+            deleteButton.setImageResource(R.drawable.delete);
+        else
+            deleteButton.setImageResource(R.drawable.trash_button);
 
         // Fragment Setting
         fragmentManager = getSupportFragmentManager();
@@ -140,7 +161,11 @@ public class DetailActivity extends AppCompatActivity {
             transaction.replace(R.id.frame, fragmentB).commitAllowingStateLoss();
             isFragmentB = true;
             button.setTag(0);
-            button.setImageResource(R.drawable.finish);
+            if(isDark == false)
+                button.setImageResource(R.drawable.finish);
+            else
+                button.setImageResource(R.drawable.check_button);
+
             if (isExist)
                 deleteButton.setVisibility(View.VISIBLE);
             else
@@ -150,7 +175,11 @@ public class DetailActivity extends AppCompatActivity {
             isFragmentB = false;
 
             button.setTag(1);
-            button.setImageResource(R.drawable.edit);
+            if(isDark == false)
+                button.setImageResource(R.drawable.edit);
+            else
+                button.setImageResource(R.drawable.write_button);
+
             deleteButton.setVisibility(View.VISIBLE);
         }
     }
@@ -162,12 +191,20 @@ public class DetailActivity extends AppCompatActivity {
         if (isFragmentB) {
             fr = new DetailFragment();
             button.setTag(1);
-            button.setImageResource(R.drawable.edit);
+            if(isDark == false)
+                button.setImageResource(R.drawable.edit);
+            else
+                button.setImageResource(R.drawable.write_button);
+
             deleteButton.setVisibility(View.VISIBLE);
         } else {
             fr = new DetailEditFragment();
             button.setTag(0);
-            button.setImageResource(R.drawable.finish);
+            if(isDark == false)
+                button.setImageResource(R.drawable.finish);
+            else
+                button.setImageResource(R.drawable.check_button);
+
             deleteButton.setVisibility(View.INVISIBLE);
         }
 
