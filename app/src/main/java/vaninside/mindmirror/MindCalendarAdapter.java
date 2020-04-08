@@ -191,7 +191,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                 if(cursor.getCount() == 0) { // NO data.
                     intent.putExtra("mode", 0);
                     if(currentdayDate.getTime() <= today.getTime()){ // 오늘 이전의 날짜일 경우
-                        Mindimage.setImageResource(R.drawable.new_emotion);
+                        Mindimage.setImageResource(R.drawable.empty_emotion);
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
