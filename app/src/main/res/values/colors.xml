@@ -12,4 +12,16 @@
     <color name="font_white">#ffffff</color>
     <color name="font_basic">#151515</color>
     <color name="transparent">#1A000000</color>
+    <color name="color_gray">#c6c6c6</color>
+
+    <color name="highlight1">#55f261aa</color>
+    <color name="highlight2">#55d81b60</color>
+    <color name="highlight3">#55ff5e00</color>
+    <color name="highlight4">#55ffff00</color>
+    <color name="highlight5">#55abf200</color>
+    <color name="highlight6">#551fda11</color>
+    <color name="highlight7">#55006600</color>
+    <color name="highlight8">#5500d8ff</color>
+    <color name="highlight9">#556600ff</color>
+    <color name="highlight10">#55000000</color>
 </resources>

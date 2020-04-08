@@ -144,7 +144,7 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 //dayTextView.setVisibility(View.INVISIBLE);
                 //dayOfweekTextView.setVisibility(View.INVISIBLE);
-                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout, currentDay);
                 //dayTextView.setVisibility(View.VISIBLE);
                 //dayOfweekTextView.setVisibility(View.VISIBLE);
                 shareInstagram(shareImage);
@@ -157,7 +157,7 @@ public class DetailFragment extends Fragment {
             public void onClick(View v) {
                 //dayTextView.setVisibility(View.INVISIBLE);
                 //dayOfweekTextView.setVisibility(View.INVISIBLE);
-                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout);
+                Bitmap shareImage = shareManager.createViewToBitmap(context, (View) mind_layout, currentDay);
                 //dayTextView.setVisibility(View.VISIBLE);
                 //dayOfweekTextView.setVisibility(View.VISIBLE);
                 shareKakao(shareImage);

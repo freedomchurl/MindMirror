@@ -10,33 +10,39 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
       android:scaleType="fitXY"
+      android:background="@drawable/detail_3_border"
       app:srcCompat="@drawable/sketch2"/>
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@color/colorTitle">
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:background="@drawable/detail_2_border">
     <ImageButton
         android:id="@+id/exitbutton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
-        android:background="#00000000"
+        android:background="@color/sketchColor"
         android:layout_weight="1"
         android:padding="12dp"
         app:srcCompat="@drawable/exit"/>
     <Space
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="5"/>
+        android:layout_weight="5"
+        android:background="@color/sketchColor"/>
     <ImageButton
         android:id="@+id/deletebutton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
-        android:background="#00000000"
+        android:background="@color/sketchColor"
         android:layout_weight="1"
         android:padding="10dp"
         app:srcCompat="@drawable/delete"/>
@@ -46,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
-        android:background="#00000000"
+        android:background="@color/sketchColor"
         android:layout_weight="1"
         android:padding="10dp"
         app:srcCompat="@drawable/edit"/>

@@ -74,7 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
         int width = (int) (display.getWidth() * 0.9);
-        int height = (int) (display.getHeight() * 0.9);  //Display 사이즈의 90%
+        int height = (int) (display.getHeight() * 0.8);  //Display 사이즈의 90%
         getWindow().getAttributes().width = width;
         getWindow().getAttributes().height = height;
 
@@ -196,7 +196,7 @@ public class DetailActivity extends AppCompatActivity {
                 db = openOrCreateDatabase("mind_calendar.db", Context.MODE_PRIVATE, null);
                 db.execSQL("DELETE FROM mind_data where date =  '" + currentDay + "';");
                 db.close();
-                Toast.makeText(getApplicationContext(), "데이터 삭제 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "감정이 삭제되었습니다", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
