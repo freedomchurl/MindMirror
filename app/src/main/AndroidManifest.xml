@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".StatActivity"> </activity>
-        <activity android:theme="@android:style/Theme.Dialog" android:name=".AlarmPicker"/>
+        <activity android:theme="@style/Popup" android:name=".AlarmPicker"/>
         <activity android:name=".OptionActivity"/>
         <activity android:name=".LockerActivity">
         </activity>
