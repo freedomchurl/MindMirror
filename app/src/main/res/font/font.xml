@@ -8,4 +8,8 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/uto_gothic"/>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/sdmi_saeng"/>
 </font-family>

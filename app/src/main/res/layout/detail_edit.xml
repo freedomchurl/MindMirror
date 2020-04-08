@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity"
     android:orientation="vertical"
-    android:background="@color/sketchColor">
+    android:background="@drawable/detail_border">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/sketchColor"
-        android:layout_marginLeft="50dp"
+        android:background="@drawable/detail_2_border"
+        android:paddingLeft="50dp"
         android:layout_marginTop="50dp">
 
 
@@ -22,16 +22,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="17"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp" />
+            android:fontFamily="@font/sdmi_saeng"
+            android:textColor="@color/font_basic"
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/edit_dayofweek_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TUE"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
+            android:paddingLeft="10dp"
+            android:fontFamily="@font/sdmi_saeng"
+            android:textColor="@color/font_basic"
+            android:textSize="30sp" />
 
 
     </LinearLayout>
@@ -47,19 +50,19 @@
 
             <EditText
                 android:id="@+id/detail_editText"
+                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="casual"
-                android:hint="Write your Memo"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimary"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/sdmi_saeng"
+                android:hint="메모를 작성하세요"
+                android:textColor="@color/font_basic"
+                android:textColorHint="@color/color_gray"
+                android:textSize="30dp"
                 android:textAlignment="center"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
-                android:paddingRight="50dp"
-                android:paddingLeft="50dp" />
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft= "50dp"/>
         </ScrollView>
 
         <LinearLayout
@@ -67,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:background="@color/sketchColor"
+            android:background="@drawable/detail_2_border"
             android:orientation="vertical">
 
             <ImageView
@@ -76,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/add_image"/>
+                app:srcCompat="@drawable/add_image2"/>
 
 
 
@@ -86,21 +89,22 @@
     </LinearLayout>
 <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="50dp"
+    android:layout_height="70dp"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:layout_marginTop="30dp"
-    android:layout_marginBottom="30dp">
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
 >
 
 
         <ImageView
             android:id="@+id/mind_1"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -111,8 +115,7 @@
 
         <ImageView
             android:id="@+id/mind_2"
-            android:layout_marginRight="2dp"
-
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -122,8 +125,7 @@
             app:srcCompat="@drawable/new_emotion_2" />
 
         <ImageView
-            android:layout_marginRight="2dp"
-
+            android:layout_marginRight="4dp"
             android:id="@+id/mind_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -135,6 +137,7 @@
 
         <ImageView
             android:id="@+id/mind_4"
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -145,7 +148,6 @@
 
         <ImageView
             android:id="@+id/mind_5"
-            android:layout_marginRight="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -157,11 +159,12 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_gravity="center">
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp">
         <ImageView
             android:id="@+id/mind_6"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -172,7 +175,7 @@
 
         <ImageView
             android:id="@+id/mind_7"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -183,8 +186,7 @@
 
         <ImageView
             android:id="@+id/mind_8"
-            android:layout_marginRight="2dp"
-
+            android:layout_marginRight="4dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -194,8 +196,7 @@
             app:srcCompat="@drawable/new_emotion_8" />
 
         <ImageView
-            android:layout_marginRight="2dp"
-
+            android:layout_marginRight="4dp"
             android:id="@+id/mind_9"
             android:layout_width="0dp"
             android:layout_height="match_parent"
