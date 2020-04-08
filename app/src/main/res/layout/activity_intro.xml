@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cheol"
+    android:background="@color/sketchColor"
     tools:context=".IntroActivity">
 
     <LinearLayout
@@ -26,7 +26,7 @@
             android:fontFamily="@font/uto_gothic"
             android:text="Mind Mirror"
             android:textAlignment="center"
-            android:textColor="#5e5a5a"
+            android:textColor="@color/intro_text"
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

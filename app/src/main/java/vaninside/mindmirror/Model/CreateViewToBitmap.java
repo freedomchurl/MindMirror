@@ -65,7 +65,6 @@ public class CreateViewToBitmap {
         // text size in pixels
         float scale = context.getResources().getDisplayMetrics().density;
         paint.setTextSize(100);
-        paint.setShadowLayer(1f, 0f, 1f, Color.WHITE);
         String gText = "";
 
         int x = (resultBitmap.getWidth()/2);
@@ -74,7 +73,7 @@ public class CreateViewToBitmap {
         Paint Pnt = new Paint();
         Pnt.setTextSize((int) (40 * scale));
         Pnt.setAntiAlias(true);
-        Pnt.setColor(Color.BLACK);
+        Pnt.setColor(context.getResources().getColor(R.color.intro_text));
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.sdmi_saeng);
         if (Build.VERSION.SDK_INT >= 28) {
@@ -106,11 +105,11 @@ public class CreateViewToBitmap {
 
                 // ----------------------- 내 감정에 따라 감정 사진 설정.
                 if (mind == 1){
-                    gText = "행복해요";
+                    gText = "행복한 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight1));
                 }
                 else if (mind == 2){
-                    gText = "신나요";
+                    gText = "신나는 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight2));
                 }
                 else if (mind == 3){
@@ -118,31 +117,31 @@ public class CreateViewToBitmap {
                     highlight.setColor(context.getResources().getColor(R.color.highlight3));
                 }
                 else if (mind == 4){
-                    gText = "사랑해요";
+                    gText = "설레는 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight4));
                 }
                 else if (mind == 5){
-                    gText = "지루해요";
+                    gText = "지루한 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight5));
                 }
                 else if (mind == 6){
-                    gText = "화나요";
+                    gText = "화나는 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight6));
                 }
                 else if (mind == 7){
-                    gText = "곤란해요";
+                    gText = "곤란한 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight7));
                 }
                 else if (mind == 8){
-                    gText = "아파요";
+                    gText = "아픈 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight8));
                 }
                 else if (mind == 9){
-                    gText = "우울해요";
+                    gText = "우울한 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight9));
                 }
                 else if (mind == 10){
-                    gText = "슬퍼요";
+                    gText = "슬픈 하루";
                     highlight.setColor(context.getResources().getColor(R.color.highlight10));
                 }
             }
