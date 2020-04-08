@@ -4,7 +4,7 @@
     android:id="@+id/item_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="60dp"
     android:background="@drawable/all_border"
     >
 
@@ -23,7 +23,7 @@
         android:id="@+id/mind_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/new_emotion"
+        android:src="@drawable/empty_emotion"
         android:adjustViewBounds="true"
         android:paddingStart="5dp"
         android:paddingLeft="5dp"

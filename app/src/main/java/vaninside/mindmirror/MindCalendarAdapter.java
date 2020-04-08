@@ -192,6 +192,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                     intent.putExtra("mode", 0);
                     if(currentdayDate.getTime() <= today.getTime()){ // 오늘 이전의 날짜일 경우
                         Mindimage.setImageResource(R.drawable.empty_emotion);
+                        Mindimage.setVisibility(View.INVISIBLE);
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -206,7 +207,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                     intent.putExtra("mode", 1);
                     while (cursor.moveToNext()) {
                         mind = cursor.getInt(2);
-
+                        Mindimage.setVisibility(View.VISIBLE);
                         // ---------- Mind 에 따라 알맞은 이모티콘 표시
                         if(mind == 1)
                             Mindimage.setImageResource(R.drawable.new_emotion_2);

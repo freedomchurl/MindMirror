@@ -180,7 +180,7 @@ public class DetailFragment extends Fragment {
 
                 // ----------------------- 내 감정에 따라 감정 사진 설정.
                 if (mind == 0)
-                    mindImage.setImageResource(R.drawable.new_emotion);
+                    mindImage.setImageResource(R.drawable.test_emotion);
                 else if (mind == 1)
                     mindImage.setImageResource(R.drawable.new_emotion_2);
                 else if (mind == 2)

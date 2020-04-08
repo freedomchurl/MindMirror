@@ -116,7 +116,7 @@ public class DetailEditFragment extends Fragment {
 
             // ---------------- 저장된 mind 따라서 사진 표시해주기.
             if (mind == 0) // default
-                imageView.setImageResource(R.drawable.new_emotion);
+                imageView.setImageResource(R.drawable.test_emotion);
             else if (mind == 1)
                 imageView.setImageResource(R.drawable.new_emotion_2);
             else if (mind == 2)
