@@ -3,12 +3,15 @@ package vaninside.mindmirror;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +21,16 @@ import android.widget.Toast;
 
 public class LockerActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageButton[] bKeyNum = new ImageButton[10];
-    private ImageButton bBackKey = null;
+    private Button[] bKeyNum = new Button[10];
+    private Button bBackKey = null;
     private String passNum = "";
     private String myPass = null;
 
     private int lockerType = 0;
 
     private TextView tPassText = null;
+
+    private ImageView [] pwView = new ImageView[4];
 
     private int isFirst = 0;
 
@@ -89,18 +94,23 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
 
     private void InitKeyNum()
     {
-        bKeyNum[0] = (ImageButton)findViewById(R.id.keypad0);
-        bKeyNum[1] = (ImageButton)findViewById(R.id.keypad1);
-        bKeyNum[2] = (ImageButton)findViewById(R.id.keypad2);
-        bKeyNum[3] = (ImageButton)findViewById(R.id.keypad3);
-        bKeyNum[4] = (ImageButton)findViewById(R.id.keypad4);
-        bKeyNum[5] = (ImageButton)findViewById(R.id.keypad5);
-        bKeyNum[6] = (ImageButton)findViewById(R.id.keypad6);
-        bKeyNum[7] = (ImageButton)findViewById(R.id.keypad7);
-        bKeyNum[8] = (ImageButton)findViewById(R.id.keypad8);
-        bKeyNum[9] = (ImageButton)findViewById(R.id.keypad9);
+        pwView[0] = (ImageView) findViewById(R.id.pw_1);
+        pwView[1] = (ImageView) findViewById(R.id.pw_2);
+        pwView[2] = (ImageView) findViewById(R.id.pw_3);
+        pwView[3] = (ImageView) findViewById(R.id.pw_4);
 
-        bBackKey = (ImageButton) findViewById(R.id.keypadback);
+        bKeyNum[0] = (Button)findViewById(R.id.keypad0);
+        bKeyNum[1] = (Button)findViewById(R.id.keypad1);
+        bKeyNum[2] = (Button)findViewById(R.id.keypad2);
+        bKeyNum[3] = (Button)findViewById(R.id.keypad3);
+        bKeyNum[4] = (Button)findViewById(R.id.keypad4);
+        bKeyNum[5] = (Button)findViewById(R.id.keypad5);
+        bKeyNum[6] = (Button)findViewById(R.id.keypad6);
+        bKeyNum[7] = (Button)findViewById(R.id.keypad7);
+        bKeyNum[8] = (Button)findViewById(R.id.keypad8);
+        bKeyNum[9] = (Button)findViewById(R.id.keypad9);
+
+        bBackKey = (Button) findViewById(R.id.keypadback);
 
         for(int i=0;i<10;i++){
             bKeyNum[i].setOnClickListener(LockerActivity.this);
@@ -159,7 +169,8 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
         if(clicked_value == -1)
         {
             int passLength = passNum.length();
-            passNum = passNum.substring(0,passLength-1); // 그 이전까지 잘라낸다. 하나 지워짐.
+            if(passLength != 0)
+                passNum = passNum.substring(0,passLength-1); // 그 이전까지 잘라낸다. 하나 지워짐.
             Log.d("mypass2",passNum);
         }
         else if(clicked_value >=0 && clicked_value <=9)
@@ -245,6 +256,9 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         }
+
+        resetPassView();
+
     }
 
     public void resetPassView()
@@ -252,5 +266,52 @@ public class LockerActivity extends AppCompatActivity implements View.OnClickLis
         /*
         비밀번호 뷰를 초기화.
          */
+        int passLen = passNum.length(); // 길이를 받아온다.
+
+        if(passLen == 0)
+        {
+            for(int i=0;i<4;i++)
+            {
+                this.pwView[i].setImageResource(R.drawable.default_pw);
+            }
+        }
+        else if(passLen == 1)
+        {
+            this.pwView[0].setImageResource(R.drawable.new_emotion_2);
+            for(int i=1;i<4;i++)
+            {
+                this.pwView[i].setImageResource(R.drawable.default_pw);
+            }
+        }
+        else if(passLen == 2)
+        {
+            this.pwView[0].setImageResource(R.drawable.new_emotion_2);
+            this.pwView[1].setImageResource(R.drawable.new_emotion_4);
+
+            for(int i=2;i<4;i++)
+            {
+                this.pwView[i].setImageResource(R.drawable.default_pw);
+            }
+        }
+        else if(passLen == 3)
+        {
+            this.pwView[0].setImageResource(R.drawable.new_emotion_2);
+            this.pwView[1].setImageResource(R.drawable.new_emotion_4);
+            this.pwView[2].setImageResource(R.drawable.new_emotion_1);
+
+            for(int i=3;i<4;i++)
+            {
+                this.pwView[i].setImageResource(R.drawable.default_pw);
+            }
+        }
+        else if(passLen == 4)
+        {
+            this.pwView[0].setImageResource(R.drawable.new_emotion_2);
+            this.pwView[1].setImageResource(R.drawable.new_emotion_4);
+            this.pwView[2].setImageResource(R.drawable.new_emotion_1);
+            this.pwView[3].setImageResource(R.drawable.new_emotion_3);
+
+        }
+
     }
 }

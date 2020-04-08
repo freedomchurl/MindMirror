@@ -25,7 +25,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".DetailActivity"
-            android:theme="@style/Theme.AppCompat.Dialog">
+            android:theme="@style/Popup">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

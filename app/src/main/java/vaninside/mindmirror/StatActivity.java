@@ -89,9 +89,6 @@ public class StatActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),arrayList.get(position)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
-
                 setRecycle(position);
             }
 

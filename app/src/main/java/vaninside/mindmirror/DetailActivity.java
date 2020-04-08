@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -46,12 +47,15 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        super.onCreate(savedInstanceState);
+        //setTheme(android.R.style.Theme_NoTitleBar);
         // get currentDay Info
         currentDay = getIntent().getStringExtra("currentDay");
 
         setContentView(R.layout.detail_fragment);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // mode 0 : No data. Edit Page
         // mode 1 : Have data. Show Page
