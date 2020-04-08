@@ -193,6 +193,7 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                     if(currentdayDate.getTime() <= today.getTime()){ // 오늘 이전의 날짜일 경우
                         imageview.setImageResource(R.drawable.empty_emotion);
                         imageview.setVisibility(View.INVISIBLE);
+                        itemView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.all_border));
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -201,13 +202,16 @@ public class MindCalendarAdapter extends RecyclerView.Adapter {
                             }
                         });
                     }else { // 오늘 이후이면 표시 안함.
-                        imageview.setImageResource(R.drawable.test_emotion);
+                        //imageview.setImageResource(R.drawable.test_emotion);
+                        imageview.setVisibility(View.INVISIBLE);
+                        itemView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.unable_border));
                     }
                 } else {
                     intent.putExtra("mode", 1);
                     while (cursor.moveToNext()) {
                         mind = cursor.getInt(2);
                         imageview.setVisibility(View.VISIBLE);
+                        itemView.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.all_border));
                         // ---------- Mind 에 따라 알맞은 이모티콘 표시
                         if (mind == 1)
                             imageview.setImageResource(R.drawable.new_emotion_1);
