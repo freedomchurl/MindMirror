@@ -21,7 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(context, LockerActivity.class);
+        Intent notificationIntent = new Intent(context, IntroActivity.class);
 
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -58,8 +58,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setWhen(System.currentTimeMillis())
 
                 .setTicker("{Time to watch some cool stuff!}")
-                .setContentTitle("상태바 드래그시 보이는 타이틀")
-                .setContentText("상태바 드래그시 보이는 서브타이틀")
+                .setContentTitle("오늘의 감정일기를 작성하세요")
+                .setContentText("오늘 하루는 어떠셨나요? 마음의 이야기를 거울에 비춰보아요")
                 .setContentInfo("INFO")
                 .setContentIntent(pendingI);
 
@@ -80,7 +80,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             Date currentDateTime = nextNotifyTime.getTime();
             String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일 a hh시 mm분 ", Locale.getDefault()).format(currentDateTime);
-            Toast.makeText(context.getApplicationContext(),"다음 알람은 " + date_text + "으로 알람이 설정되었습니다!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context.getApplicationContext(),"다음 알람은 " + date_text + "으로 알람이 설정되었습니다!", Toast.LENGTH_SHORT).show();
         }
     }
 }

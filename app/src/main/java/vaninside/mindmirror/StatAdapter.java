@@ -90,13 +90,25 @@ public class StatAdapter extends RecyclerView.Adapter {
 
             Log.d("Data",data.getEmotion() + "");
             if(data.getEmotion() == 1)
-                mindType.setImageResource(R.drawable.new_emotion_2);
+                mindType.setImageResource(R.drawable.new_emotion_1);
             else if(data.getEmotion() == 2)
-                mindType.setImageResource(R.drawable.new_emotion_3);
+                mindType.setImageResource(R.drawable.new_emotion_2);
             else if(data.getEmotion() == 3)
-                mindType.setImageResource(R.drawable.new_emotion_4);
+                mindType.setImageResource(R.drawable.new_emotion_3);
             else if(data.getEmotion() == 4)
+                mindType.setImageResource(R.drawable.new_emotion_4);
+            else if(data.getEmotion() == 5)
                 mindType.setImageResource(R.drawable.new_emotion_5);
+            else if(data.getEmotion() == 6)
+                mindType.setImageResource(R.drawable.new_emotion_6);
+            else if(data.getEmotion() == 7)
+                mindType.setImageResource(R.drawable.new_emotion_7);
+            else if(data.getEmotion() == 8)
+                mindType.setImageResource(R.drawable.new_emotion_8);
+            else if(data.getEmotion() == 9)
+                mindType.setImageResource(R.drawable.new_emotion_9);
+            else if(data.getEmotion() == 10)
+                mindType.setImageResource(R.drawable.new_emotion_10);
         }
     }
 

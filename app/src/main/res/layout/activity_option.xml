@@ -14,17 +14,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.4"
+            android:layout_weight="2.2"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/backtoMain"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:background="@color/colorTitle"
-                android:padding="10dp"
+                android:layout_weight="1.5"
+                android:paddingRight="5dp"
+                android:paddingLeft="15dp"
                 app:srcCompat="@drawable/back"/>
 
             <TextView
@@ -38,12 +39,12 @@
                 android:background="@color/colorTitle"
                 android:fontFamily="@font/uto_gothic"
                 android:text=" 설 정"
-                android:textSize="18dp"/>
+                android:textSize="22dp"/>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@color/colorTitle"
                 android:backgroundTint="@color/colorTitle" />
         </LinearLayout>

@@ -115,7 +115,11 @@ public class OptionActivity extends AppCompatActivity {
             }
         });
 
-        tAlarmTime.setText("매일 " + alarmHour + ":" + alarmMin);
+        String sHour = String.format("%02d", alarmHour);
+        String sMin = String.format("%02d", alarmMin);
+
+
+        tAlarmTime.setText("매일 " + sHour + ":" + sMin);
         tAlarmTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -247,7 +251,11 @@ public class OptionActivity extends AppCompatActivity {
 
                 Log.d("ResultFromPicker",alarmHour + " " + alarmMin);
 
-                tAlarmTime.setText("매일 " + alarmHour + ":" + alarmMin);
+                String sHour = String.format("%02d", alarmHour);
+                String sMin = String.format("%02d", alarmMin);
+
+
+                tAlarmTime.setText("매일 " + sHour + ":" + sMin);
 
             }
         }

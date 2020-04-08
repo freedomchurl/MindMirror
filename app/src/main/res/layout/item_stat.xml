@@ -3,25 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@drawable/all_border"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <ImageView
+            android:id="@+id/mindType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1.2"
+            android:adjustViewBounds="true"
+            android:foregroundGravity="center"
+            android:src="#ff0000" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:layout_weight="5"
+            android:progressBackgroundTint="@color/cheol"
+            android:progressTint="#a6a6a6" />
+    </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/mindType"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="#ff0000"
-        android:adjustViewBounds="true"
-        android:foregroundGravity="center" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_gravity="center"
-        android:progressTint="#333333"
-        android:layout_height="wrap_content"
-        android:layout_weight="5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
 
 </LinearLayout>

@@ -11,4 +11,5 @@
     <color name="cheol">#fffff9</color>
     <color name="font_white">#ffffff</color>
     <color name="font_basic">#151515</color>
+    <color name="transparent">#1A000000</color>
 </resources>
