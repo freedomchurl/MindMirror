@@ -271,6 +271,7 @@ public class DetailFragment extends Fragment {
     }
 
     public void shareKakao(Bitmap bitmap) {
+        onRequestPermission();
         /*
         TemplateParams params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder(
@@ -302,73 +303,75 @@ public class DetailFragment extends Fragment {
                                 .build()))
                 .build();
 */
-        String fileName = "share.png";
-        File filePath = shareManager.saveBitmap(bitmap, fileName);
+        if (permissionCheck) {
+            String fileName = "share.png";
+            File filePath = shareManager.saveBitmap(bitmap, fileName);
 
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/*");
-        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        File imageFile = new File(filePath, fileName);
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/*");
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            File imageFile = new File(filePath, fileName);
 
-        //File imageFile = new File("{로컬 이미지 파일 경로}");
+            //File imageFile = new File("{로컬 이미지 파일 경로}");
 
-        //final String fileURL = null;
-        KakaoLinkService.getInstance()
-                .uploadImage(this.context, true, imageFile, new ResponseCallback<ImageUploadResponse>() {
-                    @Override
-                    public void onFailure(ErrorResult errorResult) {
-                        Log.e("KAKAO_API", "이미지 업로드 실패: " + errorResult);
-                    }
+            //final String fileURL = null;
+            KakaoLinkService.getInstance()
+                    .uploadImage(this.context, true, imageFile, new ResponseCallback<ImageUploadResponse>() {
+                        @Override
+                        public void onFailure(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "이미지 업로드 실패: " + errorResult);
+                        }
 
-                    @Override
-                    public void onSuccess(ImageUploadResponse result) {
-                        Log.i("KAKAO_API", "이미지 업로드 성공");
+                        @Override
+                        public void onSuccess(ImageUploadResponse result) {
+                            Log.i("KAKAO_API", "이미지 업로드 성공");
 
-                        Log.d("KAKAO_API", "URL: " + result.getOriginal().getUrl());
+                            Log.d("KAKAO_API", "URL: " + result.getOriginal().getUrl());
 
-                        // TODO: 템플릿 컨텐츠로 이미지 URL 입력
-                        String kYear = currentDay.substring(0,4);
-                        String kMonth = currentDay.substring(4,6);
-                        String kDate = currentDay.substring(6,8);
+                            // TODO: 템플릿 컨텐츠로 이미지 URL 입력
+                            String kYear = currentDay.substring(0, 4);
+                            String kMonth = currentDay.substring(4, 6);
+                            String kDate = currentDay.substring(6, 8);
 
-                        TemplateParams params = FeedTemplate
-                                .newBuilder(ContentObject.newBuilder(
-                                        "나의 " + kYear + "년 " + kMonth + "월 " + kDate + "일" + "  감정 일기",
-                                        result.getOriginal().getUrl(),
-                                        LinkObject.newBuilder()
-                                                .setWebUrl("https://developers.kakao.com")
-                                                .setMobileWebUrl("https://developers.kakao.com")
-                                                .build())
-                                        .setDescrption(text)
-                                        .build())
-                                .addButton(new ButtonObject(
-                                        "앱에서 보기",
-                                        LinkObject.newBuilder()
-                                                .setAndroidExecutionParams("key1=value1")
-                                                .setIosExecutionParams("key1=value1")
-                                                .build()))
-                                .build();
+                            TemplateParams params = FeedTemplate
+                                    .newBuilder(ContentObject.newBuilder(
+                                            "나의 " + kYear + "년 " + kMonth + "월 " + kDate + "일" + "  감정 일기",
+                                            result.getOriginal().getUrl(),
+                                            LinkObject.newBuilder()
+                                                    .setWebUrl("https://developers.kakao.com")
+                                                    .setMobileWebUrl("https://developers.kakao.com")
+                                                    .build())
+                                            .setDescrption(text)
+                                            .build())
+                                    .addButton(new ButtonObject(
+                                            "앱에서 보기",
+                                            LinkObject.newBuilder()
+                                                    .setAndroidExecutionParams("key1=value1")
+                                                    .setIosExecutionParams("key1=value1")
+                                                    .build()))
+                                    .build();
 
-                        KakaoLinkService.getInstance()
-                                .sendDefault(context, params, new ResponseCallback<KakaoLinkResponse>() {
-                                    @Override
-                                    public void onFailure(ErrorResult errorResult) {
-                                        Log.e("KAKAO_API", "카카오링크 공유 실패: " + errorResult);
-                                    }
-//ddd
-                                    @Override
-                                    public void onSuccess(KakaoLinkResponse result) {
-                                        Log.i("KAKAO_API", "카카오링크 공유 성공");
+                            KakaoLinkService.getInstance()
+                                    .sendDefault(context, params, new ResponseCallback<KakaoLinkResponse>() {
+                                        @Override
+                                        public void onFailure(ErrorResult errorResult) {
+                                            Log.e("KAKAO_API", "카카오링크 공유 실패: " + errorResult);
+                                        }
 
-                                        // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
-                                        Log.w("KAKAO_API", "warning messages: " + result.getWarningMsg());
-                                        Log.w("KAKAO_API", "argument messages: " + result.getArgumentMsg());
-                                    }
-                                });
-                    }
-                });
+                                        //ddd
+                                        @Override
+                                        public void onSuccess(KakaoLinkResponse result) {
+                                            Log.i("KAKAO_API", "카카오링크 공유 성공");
 
+                                            // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+                                            Log.w("KAKAO_API", "warning messages: " + result.getWarningMsg());
+                                            Log.w("KAKAO_API", "argument messages: " + result.getArgumentMsg());
+                                        }
+                                    });
+                        }
+                    });
 
+        }
 
     }
 

@@ -77,9 +77,9 @@
                 android:id="@+id/mind_detail_edit_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/add_image2"/>
+                android:paddingTop="20dp"
+                app:srcCompat="@drawable/add_image3" />
 
 
 
