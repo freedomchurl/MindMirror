@@ -335,13 +335,13 @@ public class DetailFragment extends Fragment {
 
                             TemplateParams params = FeedTemplate
                                     .newBuilder(ContentObject.newBuilder(
-                                            "나의 " + kYear + "년 " + kMonth + "월 " + kDate + "일" + "  감정 일기",
+                                            kYear + "년 " + kMonth + "월 " + kDate + "일",
                                             result.getOriginal().getUrl(),
                                             LinkObject.newBuilder()
                                                     .setWebUrl("https://developers.kakao.com")
                                                     .setMobileWebUrl("https://developers.kakao.com")
                                                     .build())
-                                            .setDescrption(text)
+                                            .setDescrption("")
                                             .build())
                                     .addButton(new ButtonObject(
                                             "앱에서 보기",
