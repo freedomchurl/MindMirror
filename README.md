@@ -1,5 +1,4 @@
-# MindMirror
-Mind Mirror Project
+
 
 # Mind Mirror 안드로이드 어플
 
