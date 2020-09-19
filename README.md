@@ -2,9 +2,10 @@
 
 # Mind Mirror 안드로이드 어플
 
-플레이 스토어 > <https://play.google.com/store/apps/details?id=vaninside.mindmirror&hl=ko>
+플레이 스토어 >> <https://play.google.com/store/apps/details?id=vaninside.mindmirror&hl=ko>
 
 오늘 당신의 하루는 어떠셨나요?
+
 Mind Mirror를 통해 오늘 하루의 감정을 비춰보고 기록해보세요.
 
 ---
